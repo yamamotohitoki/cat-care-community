@@ -1,0 +1,38 @@
+/* プロフィールヘッダー */
+.profile-header {
+  display: flex;
+  align-items: center;
+
+  .header-image {
+    width: 150px;
+    height: 150px;
+    margin-right: 20px;
+  }
+
+  .profile-info {
+    display: flex;
+    align-items: center;
+
+    .profile-image {
+      width: 150px;
+      height: 150px;
+    }
+
+    .profile-name {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  }
+}
+
+/* 自己紹介 */
+.profile-introduction textarea {
+  resize: vertical; /* テキストエリアの垂直リサイズを有効にします */
+}
+
+/* ヘッダー画像 */
+.header-picture {
+  width: 100%;
+  height: auto;
+}

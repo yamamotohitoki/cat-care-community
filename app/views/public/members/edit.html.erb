@@ -1,0 +1,48 @@
+<div class="container">
+  <%= form_with(model: @member, url: update_mypage_path(@member), method: :patch, local: true, multipart: true) do |f| %>
+    <!-- プロフィールヘッダー -->
+    <div class="profile-header">
+      <div class="header-image">
+        <% if @member.header_image.present? %>
+          <%= image_tag @member.header_image.url %>
+        <% else %>
+          <%= image_tag 'default-image.svg' %>
+        <% end %>
+      </div>
+      <div class="profile-info">
+        <div class="profile-image">
+          <% if @member.profile_image.present? %>
+            <%= image_tag @member.profile_image.url %>
+          <% else %>
+            <%= image_tag 'default-image.svg' %>
+          <% end %>
+        </div>
+        <div class="profile-name">
+          <%= f.label :name, '名前' %>
+          <%= f.text_field :name %>
+        </div>
+      </div>
+    </div>
+    <!-- 自己紹介 -->
+    <div class="profile-introduction">
+      <%= f.label :introduction, '自己紹介' %>
+      <%= f.text_area :introduction %>
+    </div>
+    <div class="btn">
+      <%= f.submit '更新する', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+
+  <h4>ユーザーの飼い猫情報表示</h4>
+<% @member.cats.each do |cat| %>
+  <h2><%= cat.name %></h2>
+  <p><%= cat.birthday %></p>
+  <% if cat.image.present? %>
+    <%= image_tag cat.image,size:'100x100' %>
+  <% else %>
+    <%= image_tag 'default-image.svg' %>
+  <% end %>
+
+<% end %>
+<%= link_to 'もっと見る', cats_path %>
+</div>

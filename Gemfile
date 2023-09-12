@@ -58,5 +58,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'kaminari','~> 1.2.1'
 gem 'simple_calendar'
-gem 'font-awesome-sass'
 gem "chartkick"
+gem 'rails-i18n'
+gem "enum_help"
+gem 'carrierwave', '~> 2.0'
+gem "mini_magick"
