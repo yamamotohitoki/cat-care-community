@@ -1,0 +1,22 @@
+<h1>ブログ一覧</h1>
+<div class="col-md-9">
+  <% @blogs.each do |blog| %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">
+
+          <%= link_to blog.title, blog_path(blog) %>
+        </h5>
+        <div class="rounded-circle" >
+          <%= image_tag blog.image, size: "100x100" %>
+        </div>
+        <p class="card-text"><%= blog.body %></p>
+        <p class="card-text">投稿日時: <%= blog.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
+<%= render 'form', blog: @blog %>
+

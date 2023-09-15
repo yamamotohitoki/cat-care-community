@@ -6,12 +6,16 @@ class Public::MembersController < ApplicationController
 
   def index
     @member = Member.find(params[:id])
-    @cat = @member.cats.all
+    @cat = @member.cat.all
   end
+  
+  def create
+    @blog = current_member.blogs.new(blog_params)
+  end 
 
   def edit
      @member = current_member
-     @cat = @member.cats.all
+     @cats = @member.cats.all
   end
 
   def update

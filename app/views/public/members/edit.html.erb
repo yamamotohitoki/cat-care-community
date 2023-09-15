@@ -1,22 +1,7 @@
 <div class="container">
   <%= form_with(model: @member, url: update_mypage_path(@member), method: :patch, local: true, multipart: true) do |f| %>
     <!-- プロフィールヘッダー -->
-    <div class="profile-header">
-      <div class="header-image">
-        <% if @member.header_image.present? %>
-          <%= image_tag @member.header_image.url %>
-        <% else %>
-          <%= image_tag 'default-image.svg' %>
-        <% end %>
-      </div>
-      <div class="profile-info">
-        <div class="profile-image">
-          <% if @member.profile_image.present? %>
-            <%= image_tag @member.profile_image.url %>
-          <% else %>
-            <%= image_tag 'default-image.svg' %>
-          <% end %>
-        </div>
+
         <div class="profile-name">
           <%= f.label :name, '名前' %>
           <%= f.text_field :name %>

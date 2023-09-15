@@ -18,5 +18,5 @@ class Member < ApplicationRecord
 
   validates :introduction, length: { maximum: 250 }
 
-  mount_uploader :image, ImageUploader
+  #mount_uploader :image, ImageUploader
 end

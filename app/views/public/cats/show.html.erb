@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="text-center">
+        <%= image_tag @cat.image, class: "rounded-circle", size: "150x150" %>
+        <h3><%= @cat.name %></h3>
+      </div>
+      <table class="table table-bordered mt-4">
+        <tbody>
+          <tr>
+            <th scope="row">猫種</th>
+            <td><%= @cat.breed.name %></td>
+          </tr>
+          <tr>
+            <th scope="row">説明</th>
+            <td><%= @cat.introduction %></td>
+          </tr>
+          <tr>
+            <th scope="row">飼い主</th>
+            <td><%= @cat.member.name %></td>
+          </tr>
+          <tr>
+            <th scope="row">誕生日</th>
+            <td><%= @cat.birthday %></td>
+          </tr>
+          <tr>
+            <th scope="row">性別</th>
+            <td><%= @cat.sex %></td>
+          </tr>
+          <tr>
+            <th scope="row">家族になった日</th>
+            <td><%= @cat.family_join_day %></td>
+          </tr>
+          <tr>
+            <th scope="row">現在の体重（kg）</th>
+            <td><%= @cat.weight %>kg</td>
+          </tr>
+          <tr>
+            <th scope="row">理想の体重（kg）</th>
+            <td><%= @cat.ideal_weight %>kg</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

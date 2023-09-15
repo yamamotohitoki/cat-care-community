@@ -6,6 +6,15 @@ class Public::CatsController < ApplicationController
     @cat = Cat.new
   end
 
+  def show
+    @member = Member.find(params[:id])
+    @cat = @member.cats.find(params[:id])
+  end
+  
+  def edit
+  end
+    
+
   def create
     @cat = current_member.cats.new(cat_params)
     @cat.save_breed(params[:cat][:breed_name])

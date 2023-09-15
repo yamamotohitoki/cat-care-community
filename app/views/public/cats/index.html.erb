@@ -1,12 +1,47 @@
 <div class="container">
   <h1>飼い猫一覧</h1>
-<div class= "row">
-  <% if current_member == @member %>
-  <!-- 飼い猫の登録フォーム -->
-  <div class="card col-md-4 mt-4">
-    <div class="card-body">
-      <h5 class="card-title">飼い猫を追加</h5>
-      <%= form_with model: @cat, url: cats_path, method: :post do |f| %>
+  <div class="row">
+    <!-- 飼い猫の一覧を左側に表示 -->
+    <div class="col-md-8">
+  <%= @member.name %>さんの猫
+  <% @member.cats.each do |cat| %>
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <div class="card-img-top">
+            <% if cat.image.present? %>
+              <%= link_to cat_path(cat) do %>
+                <%= image_tag cat.image, class: "rounded-circle", size: "150x150" %>
+              <% end %>
+            <% else %>
+              <%= link_to cat_path(cat) do %>
+                <%= image_tag 'default-image.svg' %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <%= link_to cat_path(cat) do %>
+              <h5 class="card-title"><%= cat.name %></h5>
+            <% end %>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><%= cat.breed.name %></li>
+              <li class="list-group-item"><%= cat.introduction %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+  <div class="col-md-4 mt-4">
+      <% if current_member == @member %>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">飼い猫を追加</h5>
+            <%= form_with model: @cat, url: cats_path, method: :post do |f| %>
         <div class="mb-3">
           <%= f.label :image, '猫の写真', class: 'form-label' %>
           <%= f.file_field :image, class: 'form-control' %>
@@ -44,31 +79,11 @@
           <%= f.text_field :ideal_weight, class: 'form-control', placeholder: '理想の体重（kg）' %>
         </div>
         <%= f.submit '猫ちゃんを追加する', class: 'btn btn-primary' %>
+             <% end %>
+          </div>
+        </div>
       <% end %>
     </div>
   </div>
-<% end %>
+</div>
 
-
-  <!-- 飼い猫の一覧を表示 -->
-  <%= @member.name %>さんの猫
-    <% @member.cats.each do |cat| %>
-  <div class="card" style="width: 18rem;">
-  <div class="card-img-top">
-    <% if cat.image.present? %>
-       <%= image_tag cat.image, class: "rounded-circle", size: "150x150" %>
-      <% else %>
-        <%= image_tag 'default-image.svg' %>
-      <% end %>
-  </div>
-  <div class="card-body">
-    <p class="card-text"><%= cat.introduction %></p>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item"><%= cat.name %></li>
-    <li class="list-group-item"> <%= cat.breed.name %></li>
-  </ul>
-   <% end %>
-</div>
-</div>
-</div>

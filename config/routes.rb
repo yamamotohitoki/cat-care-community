@@ -23,8 +23,11 @@ Rails.application.routes.draw do
     get 'members/unsubscribe' => 'members#unsubscribe', as: 'confirm_unsubscribe'
     put 'members/information' => 'members#update'
     patch 'members/withdraw' => 'members#withdraw', as: 'withdraw_member'
-    
+
     resources :cats, only: [:show, :index, :create, :edit, :update, :destroy]
+    resources :blogs, only: [:show, :index, :create, :edit, :update, :destroy] do
+      resources :blog_comments, only: [:create]
+    end
 
   end
 
