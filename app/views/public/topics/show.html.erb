@@ -1,0 +1,22 @@
+
+<h4><%= @topic.title %></h4>
+<p><%= image_tag @topic.image, size: '100x100' %>
+<p><%= @topic.body %></p>
+
+<!-- トピックのコメントを表示 -->
+<h2>コメント</h2>
+<% @topic.topic_comments.each do |comment| %>
+  <div class="comment">
+    <p><%= comment.comment %></p>
+  </div>
+<% end %>
+
+<!-- コメントを追加するフォーム -->
+<% if current_member %>
+  <%= form_with(model: [@topic, TopicComment.new], url: community_topic_topic_comments_path(@topic.community, @topic), method: :post) do |form| %>
+    <%= form.text_area :comment, placeholder: 'コメントを追加', rows: 4 %>
+    <%= form.submit 'コメントを投稿' %>
+  <% end %>
+<% else %>
+  <p>コメントを投稿するには<a href="<%= new_session_path %>">ログイン</a>してください。</p>
+<% end %>

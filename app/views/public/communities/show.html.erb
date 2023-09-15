@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h1><%= @community.title %></h1>
+      <div class="rounded-circle">
+        <%= image_tag @community.image, size: "100x100" if @community.image.attached? %>
+      </div>
+      <p><%= @community.body %></p>
+      <p><%= @community.rule %></p>
+    </div>
+
+  <%= form_with(model: [@community, @topic], url: community_topics_path(@community), method: :post) do |form| %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :body %>
+    <%= form.text_area :body, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :写真 %>
+    <%= form.file_field :image %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "トピックを作成" %>
+  </div>
+<% end %>
+
+<h4>トピック一覧</h4>
+<% @topics.each do |topic| %>
+    <li>
+      <%= link_to topic.title, community_topic_path(topic) %>
+      <%= image_tag topic.image, size: "100x100" %>
+      <%= topic.body %>
+    </li>
+  <% end %>
+
+  </div>

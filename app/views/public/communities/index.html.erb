@@ -1,0 +1,21 @@
+<h1>コミュニティ一覧</h1>
+
+<ul>
+  <% @communities.each do |community| %>
+    <li>
+      <%= link_to community.title, community_path(community) %>
+    </li>
+    <li>
+      <%= image_tag community.image, size: '100x100' %>
+    </li>
+    <li>
+      <%= community.rule %>
+    </li>
+    <li>
+      <%= community.body %>
+    </li>
+  <% end %>
+</ul>
+
+
+<%= link_to "新しいコミュニティを作成", new_community_path %>

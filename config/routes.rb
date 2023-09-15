@@ -28,7 +28,10 @@ Rails.application.routes.draw do
     resources :blogs, only: [:show, :index, :create, :edit, :update, :destroy] do
       resources :blog_comments, only: [:create]
     end
-
+    resources :communities do
+      resources :topics, only: [:show, :create, :edit, :update, :destroy] do
+        resources :topic_comments, only: [:create, :destroy]
+      end
+    end
   end
-
 end
