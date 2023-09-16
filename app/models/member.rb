@@ -18,5 +18,14 @@ class Member < ApplicationRecord
 
   validates :introduction, length: { maximum: 250 }
 
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com') do |member|
+      member.password = SecureRandom.urlsafe_base64
+    end
+  end
+
+  def guest?
+    email == 'guest@example.com'
+  end
   #mount_uploader :image, ImageUploader
 end

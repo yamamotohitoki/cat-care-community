@@ -28,10 +28,17 @@ class Public::SessionsController < Devise::SessionsController
     root_path
   end
 
+  def guest_sign_in
+    member = Member.guest
+    sign_in member
+    flash[:notice] = "ゲストユーザーとしてログインしました。"
+    redirect_to root_path
+  end
+
   def reject_inactive_member
-    @cmember = Member.find_by(email: params[:customer][:email])
+    @mmember = Member.find_by(email: params[:member][:email])
     if @member
-      if @member.valid_password?(params[:customer][:password]) && !@member.is_active
+      if @member.valid_password?(params[:member][:password]) && !@member.is_active
         flash[:danger] = 'お客様は退会済みです。申し訳ございませんが、別のメールアドレスをお使いください。'
         redirect_to new_cmember_session_path
       end
