@@ -1,4 +1,12 @@
 ja:
+    enums:
+      blog:
+        status:
+          public: "公開"
+          private: "非公開"
+
+
+ja:
   activerecord:
     attributes:
       user:

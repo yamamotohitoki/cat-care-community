@@ -14,9 +14,9 @@ class Member < ApplicationRecord
   has_many :favorites, dependent: :destroy
 
   has_one_attached :profile_image
-  has_one_attached :header_image
 
   validates :introduction, length: { maximum: 250 }
+  validates :name, presence: true
 
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |member|
@@ -27,5 +27,4 @@ class Member < ApplicationRecord
   def guest?
     email == 'guest@example.com'
   end
-  #mount_uploader :image, ImageUploader
 end

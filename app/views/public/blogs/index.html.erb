@@ -1,22 +1,23 @@
-<h1>ブログ一覧</h1>
-<div class="col-md-9">
-  <% @blogs.each do |blog| %>
-    <div class="card mb-3">
-      <div class="card-body">
-        <h5 class="card-title">
-
-          <%= link_to blog.title, blog_path(blog) %>
-        </h5>
-        <div class="rounded-circle" >
-          <%= image_tag blog.image, size: "100x100" %>
+<div class="container">
+  <h1 class="text-center mx-3 my-3 ">ブログ一覧</h1>
+  <div class="row">
+    <% @blogs.each do |blog| %>
+    <%= link_to blog_path(blog) do %>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <% if blog.image.present? %>
+            <%= image_tag blog.image, size: '100x100' %>
+          <% else %>
+            <%= image_tag 'default-cat.jpg', size: '100x100' %>
+          <% end %>
+          <div class="card-body">
+            <p class="card-title">タイトル: <%= blog.title %></p><hr>
+            <p class="card-text">投稿者: <%= blog.member.name %>さん</p><hr>
+            <p class="card-text">投稿日時: <%= blog.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+          </div>
         </div>
-        <p class="card-text"><%= blog.body %></p>
-        <p class="card-text">投稿日時: <%= blog.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+        <% end %>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+   </div>
 </div>
-
-
-<%= render 'form', blog: @blog %>
-

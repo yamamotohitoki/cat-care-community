@@ -1,4 +1,5 @@
 class Public::CatsController < ApplicationController
+  before_action :set_cat, onry: [:show, :edit, :update]
 
   def index
     @member = current_member
@@ -7,13 +8,12 @@ class Public::CatsController < ApplicationController
   end
 
   def show
-    @member = Member.find(params[:id])
-    @cat = @member.cats.find(params[:id])
+    @cat = Cat.find(params[:id])
   end
-  
+
   def edit
   end
-    
+
 
   def create
     @cat = current_member.cats.new(cat_params)
@@ -26,10 +26,20 @@ class Public::CatsController < ApplicationController
     end
   end
 
-
-
+  def update
+    if @cat.update(cat_params)
+      flash[:notice] = '猫ちゃんの情報が更新されました。'
+      redirect_to request.referer
+    else
+      render 'index'
+    end
+  end
 
   private
+
+  def set_cat
+    @cat = Cat.find(params[:id])
+  end
 
   def cat_params
     params.require(:cat).permit(:name, :birthday, :sex, :introduction, :family_join_day, :weight, :ideal_weight, :image)

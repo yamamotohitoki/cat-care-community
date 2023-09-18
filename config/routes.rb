@@ -22,18 +22,18 @@ Rails.application.routes.draw do
     root to: 'homes#top'
 
     get 'members/mypage' => 'members#edit', as: 'mypage'
-    #get 'members/information/edit' => 'members#edit', as: 'edit_information'
     patch 'members/mypage' => 'members#update', as: 'update_mypage'
     get 'members/unsubscribe' => 'members#unsubscribe', as: 'confirm_unsubscribe'
     put 'members/information' => 'members#update'
     patch 'members/withdraw' => 'members#withdraw', as: 'withdraw_member'
 
+    resources :members, only: [:show, :index]
     resources :cats, only: [:show, :index, :create, :edit, :update, :destroy]
     resources :blogs, only: [:show, :index, :create, :edit, :update, :destroy] do
-      resources :blog_comments, only: [:create]
+      resources :blog_comments, only: [:create, :destroy]
     end
     resources :communities do
-      resources :topics, only: [:show, :create, :edit, :update, :destroy] do
+      resources :topics, only: [:show, :new, :create, :edit, :update, :destroy] do
         resources :topic_comments, only: [:create, :destroy]
       end
     end

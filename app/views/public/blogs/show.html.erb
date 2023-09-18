@@ -1,21 +1,55 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-8">
-      <h1><%= @blog.title %></h1>
-      <div class="rounded-circle">
-        <%= image_tag @blog.image, size: "100x100" if @blog.image.attached? %>
+  <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="col-md-6">
+      <div class="card">
+        <%= image_tag @blog.image, class: "card-img-top", size: "100x100" if @blog.image.attached? %>
+        <div class="card-body">
+          <h1 class="card-title text-center" style="font-size: 1.5rem;"><%= @blog.title %></h1>
+          <hr>
+          <div class="text-center">
+            <p class="card-text"><%= @blog.body %></p>
+          </div>
+          <hr>
+          <%= link_to member_path(@blog) do %>
+            <% if @blog.member.profile_image.present? %>
+              <%= image_tag @blog.member.profile_image, class: "rounded-circle image_tag", size: "50x50" %>
+            <% else %>
+              <%= image_tag 'no_image.jpg', class: "rounded-circle image_tag", size: "50x50" %>
+            <% end %>
+            <%= @blog.member.name %>さん
+          <% end %>
+        </div>
       </div>
-      <p><%= @blog.body %></p>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col-md-8">
+  <div class="row mt-3">
+    <div class="col-md-12">
       <h2>コメント</h2>
       <% @blog.blog_comments.each do |comment| %>
-        <p><%= comment.comment %></p>
+        <% if comment.member.profile_image.present? %>
+          <%= image_tag comment.member.profile_image, class: "rounded-circle image_tag", size: "50x50" %>
+        <% else %>
+          <%= image_tag 'no_image.jpg', class: "rounded-circle image_tag", size: "50x50" %>
+        <% end %>
+        <%= comment.member.name %>さん
+        <div class="card mb-2">
+          <div class="card-body">
+            <p class="comment-author">
+            </p>
+            <p class="card-text">
+              <%= comment.comment %>
+            </p>
+            <% if current_member && comment.member_id == current_member.id %>
+              <%= link_to "削除", blog_blog_comment_path(@blog, comment), method: :delete, data: { confirm: "このコメントを削除しますか？" }, class: 'btn btn-danger btn-sm float-right' %>
+            <% end %>
+          </div>
+        </div>
       <% end %>
-
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <h3>コメントを投稿する</h3>
       <%= form_with(model: BlogComment.new, url: blog_blog_comments_path(@blog), method: :post) do |f| %>
         <div class="form-group">
           <%= f.text_area :comment, placeholder: 'コメントを入力してください', class: 'form-control' %>

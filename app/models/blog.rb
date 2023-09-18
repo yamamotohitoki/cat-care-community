@@ -7,6 +7,9 @@ class Blog < ApplicationRecord
 
   has_one_attached :image
 
+  validates :title, presence: true
+  validates :body, presence: true
+  
   # 公開非公開
   enum status: { public: 0, private: 1 }, _prefix: true
 end

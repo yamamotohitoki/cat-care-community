@@ -16,9 +16,9 @@ class Public::BlogsController < ApplicationController
     @blog = current_member.blogs.new(blog_params)
     if @blog.save
       flash[:notice] = 'ブログが作成されました。'
-      redirect_to blogs_path
+      redirect_to blog_poth(@blog)
     else
-      render index
+      render 'index'
     end
   end
 
@@ -28,7 +28,7 @@ class Public::BlogsController < ApplicationController
   def update
     if @blog.update(blog_params)
       flash[:notice] = 'ブログが更新されました。'
-      redirect_to blogs_path
+      redirect_to request.referer
     else
       render 'edit'
     end

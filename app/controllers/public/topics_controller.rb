@@ -1,6 +1,11 @@
 class Public::TopicsController < ApplicationController
   before_action :set_topic, only: [:show, :edit, :update, :destroy]
 
+  def new
+    @community = Community.find(params[:community_id])
+    @topic = Topic.new
+  end
+
   def show
     # トピックの詳細を表示
   end
@@ -11,7 +16,7 @@ class Public::TopicsController < ApplicationController
 
     if @topic.save
       flash[:notice] = 'トピックが作成されました'
-      redirect_to request.referer
+      redirect_to community_topic_path(@topic, @community)
     else
       render 'communities/show'
     end

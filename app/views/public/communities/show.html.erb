@@ -1,43 +1,42 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-8">
-      <h1><%= @community.title %></h1>
-      <div class="rounded-circle">
-        <%= image_tag @community.image, size: "100x100" if @community.image.attached? %>
-      </div>
-      <p><%= @community.body %></p>
-      <p><%= @community.rule %></p>
+<div class="container mt-3">
+  <div class="card">
+   <%= image_tag @community.image, style: 'width:100%; height:200px;' %>
+    <div class="card-body">
+      <h5 class="card-title"><%= @community.title %></h5>
+      <p class="card-text"><%= @community.body %></p>
     </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+     ルール
+    </div>
+    <div class="card-body">
+      <blockquote class="blockquote">
+        <p><%= @community.rule %></p>
+    </div>
+  </div>
+      <div class="card mt-5" style="width: 18rem;">
+        <div class="card-header">
+          トピック一覧
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <% @topics.each do |topic| %>
+              <%= link_to topic.title, community_topic_path(topic) %>
+              <%= image_tag topic.image, size: "50x50 rounded-circle" %>
+           <% end %>
+          </li>
 
-  <%= form_with(model: [@community, @topic], url: community_topics_path(@community), method: :post) do |form| %>
+        </ul>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, required: true %>
+      </div>
+      <%= link_to new_community_topic_path(@community), class: "btn btn-outline-info mt-3" do %>
+          新しいトピックを作成する
+        <% end %>
   </div>
 
-  <div class="field">
-    <%= form.label :body %>
-    <%= form.text_area :body, required: true %>
-  </div>
 
-  <div class="field">
-    <%= form.label :写真 %>
-    <%= form.file_field :image %>
-  </div>
 
-  <div class="actions">
-    <%= form.submit "トピックを作成" %>
-  </div>
-<% end %>
 
-<h4>トピック一覧</h4>
-<% @topics.each do |topic| %>
-    <li>
-      <%= link_to topic.title, community_topic_path(topic) %>
-      <%= image_tag topic.image, size: "100x100" %>
-      <%= topic.body %>
-    </li>
-  <% end %>
 
-  </div>
+
