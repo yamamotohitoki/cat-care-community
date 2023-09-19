@@ -9,8 +9,16 @@ class Public::TopicCommentsController < ApplicationController
     else
       flash[:error] = 'コメントの投稿に失敗しました'
     end
+  end
 
-    redirect_to request.referer
+  def destroy
+    if current_member && @comment.member == current_member
+      @comment.destroy
+      flash[:notice] = "コメントが削除されました。"
+    else
+      flash[:error] = "コメントを削除できません。"
+    end
+      redirect_to @comment.topic
   end
 
   private

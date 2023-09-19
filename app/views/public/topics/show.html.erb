@@ -1,22 +1,60 @@
 
-<h4><%= @topic.title %></h4>
-<p><%= image_tag @topic.image, size: '100x100' %>
-<p><%= @topic.body %></p>
-
-<!-- トピックのコメントを表示 -->
-<h2>コメント</h2>
-<% @topic.topic_comments.each do |comment| %>
-  <div class="comment">
-    <p><%= comment.comment %></p>
+<div class="container">
+  <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="col-md-6">
+      <div class="card">
+        <%= image_tag @topic.image, class: "card-img-top", size: "100x100" if @topic.image.attached? %>
+        <div class="card-body">
+          <h1 class="card-title text-center" style="font-size: 1.5rem;"><%= @topic.title %></h1>
+          <hr>
+          <div class="text-center">
+            <p class="card-text"><%= @topic.body %></p>
+          </div>
+          <hr>
+            <% if @topic.image.present? %>
+              <%= image_tag @topic.image, class: "rounded-circle image_tag", size: "50x50" %>
+            <% else %>
+              <%= image_tag 'no_image.jpg', class: "rounded-circle image_tag", size: "50x50" %>
+            <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-<% end %>
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <h2>コメント</h2>
+      <% @comment.each do |comment| %>
+        <% if comment.member.profile_image.present? %>
+          <%= image_tag comment.member.profile_image, class: "rounded-circle image_tag", size: "50x50" %>
+        <% else %>
+          <%= image_tag 'no_image.jpg', class: "rounded-circle image_tag", size: "50x50" %>
+        <% end %>
+        <%= comment.member.name %>さん
+        <div class="card mb-2">
+          <div class="card-body">
+            <p class="comment-author">
+            </p>
+            <p class="card-text">
+              <%= comment.comment %>
+            </p>
+            <% if current_member && comment.member_id == current_member.id %>
+              <%= link_to "削除", community_blog_comment_path(@blog, comment), method: :delete, data: { confirm: "このコメントを削除しますか？" }, class: 'btn btn-danger btn-sm float-right' %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <h3>コメントを投稿する</h3>
+      <%= form_with(model: TopicComment.new, url: community_topic_topic_comment(@blog), method: :post) do |f| %>
+        <div class="form-group">
+          <%= f.text_area :comment, placeholder: 'コメントを入力してください', class: 'form-control' %>
+        </div>
+        <%= f.submit 'コメントする', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>
 
-<!-- コメントを追加するフォーム -->
-<% if current_member %>
-  <%= form_with(model: [@topic, TopicComment.new], url: community_topic_topic_comments_path(@topic.community, @topic), method: :post) do |form| %>
-    <%= form.text_area :comment, placeholder: 'コメントを追加', rows: 4 %>
-    <%= form.submit 'コメントを投稿' %>
-  <% end %>
-<% else %>
-  <p>コメントを投稿するには<a href="<%= new_session_path %>">ログイン</a>してください。</p>
-<% end %>
