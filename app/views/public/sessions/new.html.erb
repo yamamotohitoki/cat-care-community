@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row">
+      <div class="col mx-auto mt-5 mb-5 text-center" >
+        会員の方はこちらからログイン
+      </div>
+    </div>
+
+    <div class="form_group mx-auto">
+    <%= form_with model: @member, url: member_session_path do |f| %>
+
+      <div class="row mb-3">
+        <%= f.label :email, "メールアドレス", class:"col-2 offset-3" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="row mb-3">
+        <%= f.label :password, "パスワード", class:"col-2 offset-3" %>
+        <%= f.password_field :password, autocomplete: "current-password" %>
+      </div>
+
+      <div class="row actions d-flex justify-content-center" >
+        <%= f.submit "ログイン", class: "btn btn-sm btn-outline-primary mx-5" %>
+      </div>
+    <% end %>
+    </div>
+    <div class="row">
+      <div class="mx-auto mt-5 mb-5">
+        <%= render "public/shared/links" %>
+      </div>
+    </div>
+</div>
+
+
+
+
+

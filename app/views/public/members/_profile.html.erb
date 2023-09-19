@@ -1,0 +1,30 @@
+<div class="container mt-5">
+  <div id="member-info">
+    <div class="member-profile">
+      <div class="member-name" style="text-align: center;"><%= member.name %>さん</div>
+      <div class="row">
+        <% if member.profile_image.present? %>
+          <%= image_tag member.profile_image, class: "image_tag" %>
+        <% else %>
+          <%= image_tag 'no_image.jpg', class: "image_tag" %>
+        <% end %>
+        <p><%= member.introduction %></p>
+      </div>
+
+      <div class="row">
+        <div class="col-3">
+          <%= link_to cats_path(member) do %>
+            猫ちゃん: <%= member.cats.count %>匹
+          <% end %>
+        </div>
+        <div class="col-3">
+          <%= link_to blogs_path(member) do %>
+            投稿一覧: <%= member.blogs.count %>件
+          <% end %>
+        </div>
+        <div class="col-3">お気に入り: </div>
+        <div class="col-3">参加コミュニティ: </div>
+      </div>
+    </div>
+  </div>
+</div>

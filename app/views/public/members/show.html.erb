@@ -1,0 +1,51 @@
+<%= render 'profile', member: @member %>
+
+<div class="container py-5 my-5">
+  <% if @member.cats.empty? %>
+  <p class="text-center">猫は登録されていません。</p>
+<% else %>
+  <h2 class="text-center py-3"><%= @member.name %>さんの猫ちゃん</h2>
+  <div class="row">
+    <% @cats.each do |cat| %>
+     <%= link_to cat_path(cat) do %>
+      <div class="col-md-4">
+        <div class="card">
+          <% if cat.image.present? %>
+            <%= image_tag cat.image, class: "card-img-top rounded-circle", alt: "#{cat.name}ちゃんの画像" %>
+          <% else %>
+            <%= image_tag 'default-cat.jpg', class: "card-img-top rounded-circle", alt: "デフォルトの猫の画像" %>
+          <% end %>
+          <div class="card-body text-center">
+            <h5 class="card-title"><%= cat.name %>ちゃん</h5>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="text-center"><%= link_to 'もっと見る', cats_path %></div>
+  <% end %>
+</div>
+
+
+<div class="container">
+<h2 class="text-center"><%= @member.name %>さんの投稿</h2>
+<div class="row">
+  <% @blogs.each do |blog| %>
+      <div class="col-md-3">
+        <div class="text-center">
+          <%= link_to blog_path(blog) do %>
+          <% if blog.image.present? %>
+            <%= image_tag blog.image, size: '100x100' %>
+          <% else %>
+            <%= image_tag 'default-cat.jpg', size: '100x100' %>
+          <% end %>
+          <p>タイトル: <%= blog.title %></p>
+          <p>投稿日時: <%= blog.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+</div>
+
