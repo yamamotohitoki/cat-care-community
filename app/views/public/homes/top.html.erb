@@ -6,9 +6,12 @@
         <p class="text my-3">
           このサイトは猫ちゃんの健康の管理、ブログの投稿、
           猫好きの集まるコミュニティなど、<br>
-          猫好きがつながれるコミュニティサイトになります<br>
+          猫好きの方々ががつながれるコミュニティサイトになります<br>
         </p>
-        <%= link_to '新規会員登録(無料)', new_member_registration_path, class: 'btn btn-outline-secondary btn-lg' %>
+        <%= link_to '新規会員登録(無料)', new_member_registration_path, class: 'btn btn-outline-danger' %>
+        <div>
+          <%= link_to 'ゲストログイン', members_guest_sign_in_path, method: :post, class: 'btn btn-outline-primary mt-3' %>
+        </div>
       </div>
     </div>
   </div>

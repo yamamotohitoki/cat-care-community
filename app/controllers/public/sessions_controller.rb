@@ -32,18 +32,18 @@ class Public::SessionsController < Devise::SessionsController
     member = Member.guest
     sign_in member
     flash[:notice] = "ゲストユーザーとしてログインしました。"
-    redirect_to root_path
+    redirect_to mypage_path
   end
 
-  def reject_inactive_member
-    @mmember = Member.find_by(email: params[:member][:email])
-    if @member
-      if @member.valid_password?(params[:member][:password]) && !@member.is_active
-        flash[:danger] = 'お客様は退会済みです。申し訳ございませんが、別のメールアドレスをお使いください。'
-        redirect_to new_cmember_session_path
-      end
-    end
-  end
+  # def reject_inactive_member
+  #   @mmember = Member.find_by(email: params[:member][:email])
+  #   if @member
+  #     if @member.valid_password?(params[:member][:password]) && !@member.is_active
+  #       flash[:danger] = 'お客様は退会済みです。申し訳ございませんが、別のメールアドレスをお使いください。'
+  #       redirect_to new_cmember_session_path
+  #     end
+  #   end
+  # end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params

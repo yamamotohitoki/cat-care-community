@@ -1,15 +1,13 @@
 class Public::CatsController < ApplicationController
   before_action :set_cat, onry: [:show, :edit, :update]
-  before_action :set_member, onry: [:show]
+  before_action :set_member, onry: [:show, :index]
 
   def index
-    @member = Member.find_by(params[:id])
     @cats = @member.cats.all
     @cat = Cat.new
   end
 
   def show
-
   end
 
   def edit
@@ -39,11 +37,11 @@ class Public::CatsController < ApplicationController
   private
 
   def set_cat
-    @cat = Cat.find(params[:id])
+    @cat = Cat.find_by(params[:id])
   end
 
   def set_member
-    @member = Member.find(params[:id])
+    @member = Member.find_by(params[:id])
   end
 
 
