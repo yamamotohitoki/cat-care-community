@@ -8,7 +8,7 @@
           <% if blog.image.present? %>
             <%= image_tag blog.image, size: '100x100' %>
           <% else %>
-            <%= image_tag 'default-cat.jpg', size: '100x100' %>
+            <%= image_tag 'blog-no-image.jpg', size: '100x100' %>
           <% end %>
           <div class="card-body">
             <p class="card-title">タイトル: <%= blog.title %></p><hr>

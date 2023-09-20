@@ -1,12 +1,11 @@
 class Public::CommunitiesController < ApplicationController
-  before_action :set_community, only: [:show, :create, :edit, :update, :destroy]
+  before_action :set_community, only: [:show, :edit, :update, :destroy]
 
   def index
     @communities = Community.all
   end
 
   def show
-   @community = Community.find(params[:id])
    @topic = Topic.new
    @topics = @community.topics
   end

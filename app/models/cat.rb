@@ -4,7 +4,7 @@ class Cat < ApplicationRecord
   belongs_to :breed
 
   has_one_attached :image
-  #mount_uploader :image, ImageUploader
+  
 
   def save_breed(breed_name)
     # 既存の猫の種類を検索するか、新しい猫の種類を作成する

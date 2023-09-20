@@ -10,11 +10,11 @@
             <p class="card-text"><%= @blog.body %></p>
           </div>
           <hr>
-          <%= link_to member_path(@blog) do %>
+          <%= link_to member_path(@member) do %>
             <% if @blog.member.profile_image.present? %>
               <%= image_tag @blog.member.profile_image, class: "rounded-circle image_tag", size: "50x50" %>
             <% else %>
-              <%= image_tag 'no_image.jpg', class: "rounded-circle image_tag", size: "50x50" %>
+              <%= image_tag 'member-no-image.jpg', class: "rounded-circle image_tag", size: "50x50" %>
             <% end %>
             <%= @blog.member.name %>さん
           <% end %>
@@ -29,7 +29,7 @@
         <% if comment.member.profile_image.present? %>
           <%= image_tag comment.member.profile_image, class: "rounded-circle image_tag", size: "50x50" %>
         <% else %>
-          <%= image_tag 'no_image.jpg', class: "rounded-circle image_tag", size: "50x50" %>
+          <%= image_tag 'member-no-image.jpg', class: "rounded-circle image_tag", size: "50x50" %>
         <% end %>
         <%= comment.member.name %>さん
         <div class="card mb-2">

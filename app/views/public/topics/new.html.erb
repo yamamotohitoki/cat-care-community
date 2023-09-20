@@ -1,6 +1,7 @@
 <div class="container">
+  <%= render 'public/communities/header', community: @community %>
   <h1 class="text-center">トピック作成フォーム</h1>
-<%= form_with(model: [@community, @topic], url: community_topics_path(@community), method: :post, html: { class: "form" }) do |form| %>
+<%= form_with(model: @topic, url: topics_path, method: :post, html: { class: "form" }) do |form| %>
   <div class="form-group">
     <%= form.label :タイトル, class: "control-label" %>
     <%= form.text_field :title, class: "form-control", required: true %>
