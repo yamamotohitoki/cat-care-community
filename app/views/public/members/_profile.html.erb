@@ -3,22 +3,26 @@
     <div class="member-profile">
       <div class="member-name" style="text-align: center;"><%= member.name %>さん</div>
       <div class="row">
-        <% if member.profile_image.present? %>
-          <%= image_tag member.profile_image, class: "image_tag" %>
-        <% else %>
-          <%= image_tag 'no_image.jpg', class: "image_tag" %>
-        <% end %>
-        <p><%= member.introduction %></p>
+        <div class="col-2">
+          <% if member.profile_image.present? %>
+            <%= image_tag member.profile_image, class: "image_tag bg-light" %>
+          <% else %>
+            <%= image_tag 'member-no-image.jpg', class: "image_tag bg-light" %>
+          <% end %>
+        </div>
+        <div class="col-10">
+          <p><%= member.introduction %></p>
+        </div>
       </div>
 
-      <div class="row">
+      <div class="row mt-5 text-center">
         <div class="col-3">
-          <%= link_to cats_path(member) do %>
+          <%= link_to cats_path do %>
             猫ちゃん: <%= member.cats.count %>匹
           <% end %>
         </div>
         <div class="col-3">
-          <%= link_to blogs_path(member) do %>
+          <%= link_to blogs_path do %>
             投稿一覧: <%= member.blogs.count %>件
           <% end %>
         </div>

@@ -1,29 +1,28 @@
 class Public::TopicsController < ApplicationController
   before_action :set_topic, only: [:show, :edit, :update, :destroy]
+  before_action :set_community, only: [:show, :new, :create]
 
   def new
-    @community = Community.find(params[:community_id])
     @topic = Topic.new
   end
 
   def show
-    # トピックの詳細を表示
+    @comment = TopicComment.new
+    @comments = @topic.topic_comments.all
   end
 
   def create
-    @community = Community.find(params[:community_id])
-    @topic = @community.topics.new(topic_params)
+    @topic = Topic.new(topic_params)
 
     if @topic.save
       flash[:notice] = 'トピックが作成されました'
-      redirect_to community_topic_path(@topic, @community)
+      redirect_to request.referer
     else
-      render 'communities/show'
+      render 'show'
     end
   end
 
   def edit
-    # トピックの編集フォームを表示
   end
 
   def update
@@ -45,8 +44,12 @@ class Public::TopicsController < ApplicationController
       @topic = Topic.find(params[:id])
     end
 
+    def set_community
+      @community = Community.find_by(params[:community_id])
+    end
+
     def topic_params
-      params.require(:topic).permit(:community_id, :title, :body, :image)
+      params.require(:topic).permit(:title, :body, :image)
     end
 end
 

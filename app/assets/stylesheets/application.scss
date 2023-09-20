@@ -143,36 +143,23 @@ $transition-duration: 0.5s;
 
 #member-info {
   .member-profile {
-    background-color: #FFFFCC;
     background:rgba(255,255,204,0.8);
-    color: #800000;
     border-radius: 30px;
 
   p {
     margin-top: 40px;
-    margin-left: 11px;
   }
 
 
     .image_tag {
-      border: 1px solid #000000;
       border-radius: 50%;
       width: 180px;
       height: 180px;
     }
-
-    .row {
-      margin: 0;
-      border-bottom: 1px solid #fff;
-    }
-
-    p {
-      font-size: 15px;
-    }
   }
-  .col-md-3 {
+  .col {
       background-color: #fff;
-
+      text-align: center;
     }
 }
 

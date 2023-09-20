@@ -1,7 +1,7 @@
 class Public::MembersController < ApplicationController
 
   def show
-     @member = Member.find(params[:id])
+     @member = Member.find_by(params[:id])
      @cats = @member.cats.all
      @blogs = @member.blogs.all
      @communities = @member.communities.all

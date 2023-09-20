@@ -1,14 +1,13 @@
 class Public::CatsController < ApplicationController
   before_action :set_cat, onry: [:show, :edit, :update]
+  before_action :set_member, onry: [:show, :index]
 
   def index
-    @member = current_member
     @cats = @member.cats.all
     @cat = Cat.new
   end
 
   def show
-    @cat = Cat.find(params[:id])
   end
 
   def edit
@@ -20,7 +19,7 @@ class Public::CatsController < ApplicationController
     @cat.save_breed(params[:cat][:breed_name])
     if @cat.save
       flash[:notice] = "猫ちゃんを登録しました"
-      redirect_to mypage_path
+      redirect_to cats_path(@cat)
     else
        render 'index'
     end
@@ -38,8 +37,14 @@ class Public::CatsController < ApplicationController
   private
 
   def set_cat
-    @cat = Cat.find(params[:id])
+    @cat = Cat.find_by(params[:id])
   end
+
+  def set_member
+    @member = Member.find_by(params[:id])
+  end
+
+
 
   def cat_params
     params.require(:cat).permit(:name, :birthday, :sex, :introduction, :family_join_day, :weight, :ideal_weight, :image)

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 }
 
   devise_scope :member do
-    post "members/guest_sign_in", to: "public/sessions#guest_sign_in"
+    post '/members/guest_sign_in', to: 'public/sessions#guest_sign_in'
   end
 
   scope module: :public do
@@ -29,13 +29,12 @@ Rails.application.routes.draw do
 
     resources :members, only: [:show, :index]
     resources :cats, only: [:show, :index, :create, :edit, :update, :destroy]
-    resources :blogs, only: [:show, :index, :create, :edit, :update, :destroy] do
+    resources :blogs, only: [:new, :show, :index, :create, :edit, :update, :destroy] do
       resources :blog_comments, only: [:create, :destroy]
     end
-    resources :communities do
-      resources :topics, only: [:show, :new, :create, :edit, :update, :destroy] do
-        resources :topic_comments, only: [:create, :destroy]
-      end
+    resources :communities
+    resources :topics, only: [:show, :new, :create, :edit, :update, :destroy] do
+      resources :topic_comments, only: [:create, :destroy]
     end
   end
 end

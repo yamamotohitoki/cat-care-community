@@ -1,24 +1,29 @@
 class Public::BlogsController < ApplicationController
 
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
+  
+  def new
+    @blog = Blog.new
+  end
+  
+  def show
+    @blog = Blog.find(params[:id])
+    @member = @blog.member
+    @comment = BlogComment.new
+  end
 
   def index
     @blog = Blog.new
     @blogs = Blog.all
   end
 
-  def show
-    @blog = Blog.find(params[:id])
-    @comment = BlogComment.new
-  end
-
   def create
     @blog = current_member.blogs.new(blog_params)
     if @blog.save
       flash[:notice] = 'ブログが作成されました。'
-      redirect_to blog_poth(@blog)
+      redirect_to blog_path(@blog)
     else
-      render 'index'
+      render 'new'
     end
   end
 

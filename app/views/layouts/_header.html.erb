@@ -26,14 +26,10 @@
                   <li class="nav-item"><%= link_to 'コミュニティ', communities_path, class: 'nav-link' %></li>
                 <% else %>
                   <li class="nav-item"><%= link_to 'すべての投稿', blogs_path, class: 'nav-link' %></li>
-                  <li class="nav-item"><%= link_to 'コミュニティ一覧', communities_path, class: 'nav-link' %></li>
-                  <li class="nav-item">
-                  <%= form_tag(members_guest_sign_in_path, method: :post) do %>
-                  <%= link_to 'ゲストログイン', members_guest_sign_in_path, class: 'nav-link' %>
-                  <% end %>
-                  </li>
-                  <li><%= link_to 'ログイン', new_member_session_path, class: 'nav-item' %></li>
-                  <li><%= link_to '新規会員登録(無料)', new_member_registration_path, class: 'nav-item' %></li>
+                  <li class="nav-item"><%= link_to 'コミュニティ', communities_path, class: 'nav-link' %></li>
+                  <li class="nav-item"><%= link_to 'ゲストログイン', members_guest_sign_in_path, method: :post, class: 'nav-link' %></li>
+                  <li class="nav-item"><%= link_to 'ログイン', new_member_session_path, class: 'nav-link' %></li>
+                  <li class="nav-item"><%= link_to '新規会員登録(無料)', new_member_registration_path, class: 'nav-link' %></li>
                 <% end %>
               </ul>
             </div>

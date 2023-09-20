@@ -1,5 +1,6 @@
 
 <div class="container">
+  <%= render 'public/communities/header', community: @community %>
   <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
     <div class="col-md-6">
       <div class="card">
@@ -14,41 +15,45 @@
             <% if @topic.image.present? %>
               <%= image_tag @topic.image, class: "rounded-circle image_tag", size: "50x50" %>
             <% else %>
-              <%= image_tag 'no_image.jpg', class: "rounded-circle image_tag", size: "50x50" %>
+              <%= image_tag 'blog-no-image.jpg', class: "rounded-circle image_tag", size: "50x50" %>
             <% end %>
         </div>
       </div>
     </div>
   </div>
-  <div class="row mt-3">
+  <div class="row">
     <div class="col-md-12">
-      <h2>コメント</h2>
-      <% @comment.each do |comment| %>
-        <% if comment.member.profile_image.present? %>
-          <%= image_tag comment.member.profile_image, class: "rounded-circle image_tag", size: "50x50" %>
-        <% else %>
-          <%= image_tag 'no_image.jpg', class: "rounded-circle image_tag", size: "50x50" %>
-        <% end %>
-        <%= comment.member.name %>さん
-        <div class="card mb-2">
-          <div class="card-body">
-            <p class="comment-author">
-            </p>
-            <p class="card-text">
-              <%= comment.comment %>
-            </p>
-            <% if current_member && comment.member_id == current_member.id %>
-              <%= link_to "削除", community_blog_comment_path(@blog, comment), method: :delete, data: { confirm: "このコメントを削除しますか？" }, class: 'btn btn-danger btn-sm float-right' %>
-            <% end %>
+      <h2>チャット</h2>
+      <% if @comments.present? %>
+        <% @comments.each do |comment| %>
+          <% if comment.member.profile_image.present? %>
+            <%= image_tag comment.member.profile_image, class: "rounded-circle image_tag", size: "50x50" %>
+          <% else %>
+            <%= image_tag 'member-no-image.jpg', class: "rounded-circle image_tag", size: "50x50" %>
+          <% end %>
+          <%= comment.member.name %>さん
+          <div class="card mb-2">
+            <div class="card-body">
+              <p class="comment-author">
+              </p>
+              <p class="card-text">
+                <%= comment.comment %>
+              </p>
+              <% if current_member && comment.member_id == current_member.id %>
+                <%= link_to "削除", topic_topic_comment_path(@topic, comment), method: :delete, data: { confirm: "このコメントを削除しますか？" }, class: 'btn btn-danger btn-sm float-right' %>
+              <% end %>
+            </div>
           </div>
-        </div>
+        <% end %>
+      <% else %>
+        <p>コメントを投稿してください</p>
       <% end %>
     </div>
   </div>
   <div class="row mt-3">
     <div class="col-md-12">
       <h3>コメントを投稿する</h3>
-      <%= form_with(model: TopicComment.new, url: community_topic_topic_comment(@blog), method: :post) do |f| %>
+      <%= form_with(model: @comment, url: topic_topic_comments_path(@topic), method: :post) do |f| %>
         <div class="form-group">
           <%= f.text_area :comment, placeholder: 'コメントを入力してください', class: 'form-control' %>
         </div>

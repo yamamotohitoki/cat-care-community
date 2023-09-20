@@ -1,4 +1,4 @@
-<%= render 'profile', member: @member %>
+<%= render 'profile', member: @member, cats: @cats, blogs: @blogs %>
 
 <div class="container mt-5">
   <%= form_with(model: @member, url: update_mypage_path(@member), method: :patch, html: { class: "form-horizontal" }) do |f| %>
@@ -31,13 +31,14 @@
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <%= f.submit '更新する', class: "btn btn-outline-secondary" %>
+            <%= f.submit '更新する', class: "btn btn-outline-primary" %>
           </div>
         </div>
       </div>
     </div>
   <% end %>
 </div>
+ <%= link_to 'ブログを投稿する', new_blog_path %>
 
 
 

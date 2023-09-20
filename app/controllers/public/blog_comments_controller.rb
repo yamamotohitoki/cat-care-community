@@ -22,7 +22,7 @@ class Public::BlogCommentsController < ApplicationController
     else
       flash[:error] = "コメントを削除できません。"
     end
-    redirect_to @comment.blog
+    redirect_to request.referer
   end
 
   private
