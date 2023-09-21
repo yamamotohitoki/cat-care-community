@@ -6,6 +6,19 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
+  namespace :admin do
+   get 'top' => 'homes#top', as: 'top'
+
+   resources :members, only: [:index, :show, :edit, :update] do
+     get 'blog_index' => 'blogs#blog_index', as: 'blog_index'
+   end
+   resources :blogs, only: [:index, :show, :destroy] do
+     resources :blog_comments, only: [:destroy]
+   end
+   resources :communities, only: [:index, :show, :destroy]
+   resources :topics, only: [:index, :show, :destroy]
+   resources :topic_comments, only: [:destroy]
+ end
 
   # 会員用
   # URL /customers/sign_in ...

@@ -197,3 +197,10 @@ $transition-duration: 0.5s;
   color: #333;
 }
 
+.txt-limit {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+

@@ -22,14 +22,13 @@
           </ul>
           <div class="card-body">
             <div class="btn-group d-flex justify-content-between">
-              <%= link_to 'ブログ詳細', blog_path(blog), class: 'btn btn-primary mr-4' %>
-              <%= link_to '会員詳細', member_path(blog.member), class: 'btn btn-secondary' %>
+              <%= link_to 'ブログ詳細', admin_blog_path(blog), class: 'btn btn-primary mr-4' %>
+              <%= link_to '会員詳細', admin_member_path(blog.member), class: 'btn btn-secondary' %>
             </div>
           </div>
         </div>
       </div>
     <% end %>
   </div>
+  </div>
 </div>
-
-
