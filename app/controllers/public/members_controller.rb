@@ -18,7 +18,8 @@ class Public::MembersController < ApplicationController
 
   def edit
      @member = current_member
-     @cats = @member.cats.all
+     @memos = @member.memos
+     @memos = Memo.all.where("day >= ?", Date.current).where("day < ?", Date.current >> 3).order(day: :desc)
   end
 
   def update

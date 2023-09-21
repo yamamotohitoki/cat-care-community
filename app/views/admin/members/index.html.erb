@@ -1,0 +1,38 @@
+<div class="container mt-3">
+  <h3 class="font-weight-bold mb-4">会員一覧</h3>
+  <div class="row">
+    <table class="table table-sm table-hover">
+      <thead>
+        <tr>
+          <th>会員ID</th>
+          <th>ニックネーム</th>
+          <th>メールアドレス</th>
+          <th>ステータス</th>
+        </tr>
+      </thead>
+      <tdody>
+       <% @members.each do |member| %>
+        <tr>
+          <td><%= member.id %></td>
+          <td>
+            <% if member.profile_image.present? %>
+              <%= image_tag member.profile_image, size: '50x50' %>
+            <% else %>
+              <%= image_tag 'member-no-image.jpg', size: '50x50' %>
+            <% end %>
+            <%= link_to member.name, admin_member_path(member) %>
+          </td>
+          <td><%= member.email %></td>
+          <td class="font-weight-bold">
+            <% if member.is_active %>
+              <p class="text-success">有効</p>
+            <% else %>
+              <p class="text-danger">退会</p>
+            <% end %>
+          </td>
+        </tr>
+       <% end %>
+       </tdody>
+    </table>
+  </div>
+</div>

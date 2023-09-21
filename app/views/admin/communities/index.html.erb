@@ -1,0 +1,20 @@
+<div class="container mt-3">
+  <h1 class="text-center">コミュニティ一覧</h1>
+  <div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <% @communities.each do |community| %>
+        <div class="col-md-4">
+          <%= image_tag community.image, class: "img-fluid rounded-start" %>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><%= community.title %></h5>
+            <p class="card-text"><%= community.body %></p>
+            <p class="card-text"><small class="text-body-secondary"><%= community.created_at.strftime("%Y/%m/%d %H:%M") %></small></p>
+            <%= link_to "詳細", admin_community_path(community), class: "btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

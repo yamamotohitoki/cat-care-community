@@ -1,11 +1,11 @@
 class Public::BlogsController < ApplicationController
 
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
-  
+
   def new
     @blog = Blog.new
   end
-  
+
   def show
     @blog = Blog.find(params[:id])
     @member = @blog.member
@@ -15,6 +15,11 @@ class Public::BlogsController < ApplicationController
   def index
     @blog = Blog.new
     @blogs = Blog.all
+  end
+
+  def blog_index
+    @member = Member.find(params[:member_id])
+    @blogs = @member.blogs
   end
 
   def create

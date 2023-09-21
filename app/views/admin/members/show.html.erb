@@ -1,0 +1,45 @@
+
+<div class="container mt-3">
+
+  <h4 class="font-weight-bold"><%= @member.name %>さんの会員詳細</h4>
+
+  <table class="table table-bordered mt-5">
+    <tr>
+      <th>会員ID</th>
+      <td><%= @member.id %></td>
+    </tr>
+    <tr>
+      <th>ニックネーム</th>
+      <td>
+        <% if @member.profile_image.present? %>
+          <%= image_tag @member.profile_image, size: '50x50' %>
+        <% else %>
+          <%= image_tag 'member-no-image.jpg', size: '50x50' %>
+        <% end %>
+        <%= @member.name %>
+      </td>
+    </tr>
+    <tr>
+      <th>自己紹介</th>
+      <td><%= @member.introduction %></td>
+    </tr>
+    <tr>
+      <th>メールアドレス</th>
+      <td><%= @member.email %></td>
+    </tr>
+    <tr>
+      <th>会員ステータス</th>
+      <td class="font-weight-bold">
+      <% if @member.is_active %>
+        <p class="text-success">有効</p>
+      <% else %>
+        <p class="text-danger">退会</p>
+      <% end %>
+      </td>
+    </tr>
+  </table>
+  <div class="d-flex justify-content-center mt-4">
+    <%= link_to "編集する", edit_admin_member_path(@member), class: "btn btn-sm btn-outline-success mr-4" %>
+    <%= link_to "ブログ一覧を見る", admin_member_blog_index_path(@member), class: "btn btn-sm btn-outline-primary" %>
+  </div>
+</div>

@@ -2,7 +2,7 @@ class Member < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, authentication_keys: [:name]
 
   has_many :blogs, dependent: :destroy
   has_many :cats, dependent: :destroy
@@ -27,5 +27,13 @@ class Member < ApplicationRecord
 
   def guest?
     email == 'guest@example.com'
+  end
+  
+  def member_status
+    if is_active == true
+      "有効"
+    else
+      "退会"
+    end
   end
 end
