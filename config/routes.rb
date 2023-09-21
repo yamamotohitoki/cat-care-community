@@ -27,7 +27,11 @@ Rails.application.routes.draw do
     put 'members/information' => 'members#update'
     patch 'members/withdraw' => 'members#withdraw', as: 'withdraw_member'
 
-    resources :members, only: [:show, :index]
+    resources :members, only: [:show, :index] do
+     get 'blog_index' => 'blogs#blog_index', as: 'blog_index'
+     get 'cat_index' => "cats#cat_index", as: 'cat_index'
+    end
+    resources :memos, onry: [:create, :update, :destroy]
     resources :cats, only: [:show, :index, :create, :edit, :update, :destroy]
     resources :blogs, only: [:new, :show, :index, :create, :edit, :update, :destroy] do
       resources :blog_comments, only: [:create, :destroy]

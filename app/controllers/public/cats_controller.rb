@@ -6,6 +6,11 @@ class Public::CatsController < ApplicationController
     @cats = @member.cats.all
     @cat = Cat.new
   end
+  
+  def cat_index
+    @member = Member.find(params[:member_id])
+    @cats = @member.cats
+  end
 
   def show
   end
