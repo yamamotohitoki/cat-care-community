@@ -1,0 +1,37 @@
+<%= form_with model: @cat, url: edit_cat_path(@cat), method: :patch do |form| %>
+  <table class="table table-bordered mt-4">
+    <tbody>
+      <tr>
+        <th scope="row">猫種</th>
+        <td><%= form.text_field :breed_name, class: "form-control", placeholder: "猫種" %></td>
+      </tr>
+      <tr>
+        <th scope="row">説明</th>
+        <td><%= form.text_area :introduction, class: "form-control", placeholder: "説明" %></td>
+      </tr>
+      <tr>
+        <th scope="row">誕生日</th>
+        <td><%= form.date_field :birthday, class: "form-control" %></td>
+      </tr>
+      <tr>
+        <th scope="row">性別</th>
+        <td><%= form.select :sex, ['男性', '女性', 'その他'], {}, class: "form-control" %></td>
+      </tr>
+      <tr>
+        <th scope="row">家族になった日</th>
+        <td><%= form.date_field :family_join_day, class: "form-control" %></td>
+      </tr>
+      <tr>
+        <th scope="row">現在の体重（kg）</th>
+        <td><%= form.number_field :weight, class: "form-control", step: "0.01" %></td>
+      </tr>
+      <tr>
+        <th scope="row">理想の体重（kg）</th>
+        <td><%= form.number_field :ideal_weight, class: "form-control", step: "0.01" %></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="text-center">
+    <%= form.submit "更新", class: "btn btn-primary" %>
+  </div>
+<% end %>

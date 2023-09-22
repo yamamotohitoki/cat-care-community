@@ -1,26 +1,29 @@
-
+<div class="container">
+<h1>コミュニティ作成フォーム</h1>
 <%= form_with(model: @community, url: communities_path, local: true) do |form| %>
-  <div class="field">
+  <div class="form-group">
     <%= form.label :タイトル %>
-    <%= form.text_field :title, required: true %>
+    <%= form.text_field :title, required: true, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :ルール %>
-    <%= form.text_area :rule %>
+    <%= form.text_area :rule, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :コミュニティ詳細 %>
-    <%= form.text_area :body, required: true %>
+    <%= form.text_area :body, required: true, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :写真 %>
-    <%= form.file_field :image %>
+  <div class="form-group">
+    <%= form.label :イメージ写真 %>
+    <%= form.file_field :image, class: "form-control-file" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit "コミュニティを作成する" %>
+  <div class="form-group">
+    <%= form.submit "コミュニティを作成する", class: "btn btn-primary" %>
   </div>
 <% end %>
+
+</div>

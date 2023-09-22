@@ -44,4 +44,9 @@
       </table>
     </div>
   </div>
+  <div class="text-center">
+   <% if @member == @cat.member %>
+    <%= link_to "編集する", edit_cat_path(@cat), class: "btn btn-outline-success" %>
+   <% end %>
+  </div>
 </div>

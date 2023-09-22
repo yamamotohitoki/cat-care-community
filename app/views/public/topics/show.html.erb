@@ -1,26 +1,26 @@
+<%= render 'public/communities/header', community: @community %>
 
 <div class="container">
-  <%= render 'public/communities/header', community: @community %>
-  <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
-    <div class="col-md-6">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
       <div class="card">
-        <%= image_tag @topic.image, class: "card-img-top", size: "100x100" if @topic.image.attached? %>
+        <% if @topic.image.present? %>
+          <%= image_tag @topic.image, class: "card-img-top img-fluid" %>
+        <% else %>
+          <%= image_tag 'blog-no-image.jpeg', class: "card-img-top img-fluid" %>
+        <% end %>
         <div class="card-body">
-          <h1 class="card-title text-center" style="font-size: 1.5rem;"><%= @topic.title %></h1>
-          <hr>
-          <div class="text-center">
-            <p class="card-text"><%= @topic.body %></p>
-          </div>
-          <hr>
-            <% if @topic.image.present? %>
-              <%= image_tag @topic.image, class: "rounded-circle image_tag", size: "50x50" %>
-            <% else %>
-              <%= image_tag 'blog-no-image.jpg', class: "rounded-circle image_tag", size: "50x50" %>
-            <% end %>
+          <h5 class="card-title"><%= @topic.title %></h5>
+          <p class="card-text"><%= @topic.body %></p>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+
+
+<div class= container>
   <div class="row">
     <div class="col-md-12">
       <h2>チャット</h2>
@@ -40,7 +40,7 @@
                 <%= comment.comment %>
               </p>
               <% if current_member && comment.member_id == current_member.id %>
-                <%= link_to "削除", topic_topic_comment_path(@topic, comment), method: :delete, data: { confirm: "このコメントを削除しますか？" }, class: 'btn btn-danger btn-sm float-right' %>
+                <%= link_to "削除", community_topic_topic_comment_path(@topic, @community, comment), method: :delete, data: { confirm: "このコメントを削除しますか？" }, class: 'btn btn-danger btn-sm float-right' %>
               <% end %>
             </div>
           </div>
@@ -53,7 +53,7 @@
   <div class="row mt-3">
     <div class="col-md-12">
       <h3>コメントを投稿する</h3>
-      <%= form_with(model: @comment, url: topic_topic_comments_path(@topic), method: :post) do |f| %>
+      <%= form_with(model: @comment, url: community_topic_topic_comments_path(@topic, @community), method: :post) do |f| %>
         <div class="form-group">
           <%= f.text_area :comment, placeholder: 'コメントを入力してください', class: 'form-control' %>
         </div>
