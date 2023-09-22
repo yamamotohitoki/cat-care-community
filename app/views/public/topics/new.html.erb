@@ -1,4 +1,5 @@
 <%= render 'public/communities/header', community: @community %>
+<%= render 'public/layouts/error_messages', topic: @topic %>
 <div class="container mt-5">
   <h2>トピック作成フォーム</h1>
 <%= form_with model: @topic, url: community_topics_path(@community), method: :post do |form| %>

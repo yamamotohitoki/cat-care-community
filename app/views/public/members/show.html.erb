@@ -13,7 +13,7 @@
           <% if cat.image.present? %>
             <%= image_tag cat.image, class: "card-img-top rounded-circle", alt: "#{cat.name}ちゃんの画像" %>
           <% else %>
-            <%= image_tag 'default-cat.jpg', class: "card-img-top rounded-circle", alt: "デフォルトの猫の画像" %>
+            <%= image_tag 'cat-no-image.jpg', class: "card-img-top rounded-circle", alt: "デフォルトの猫の画像" %>
           <% end %>
           <div class="card-body text-center">
             <h5 class="card-title"><%= cat.name %>ちゃん</h5>
@@ -38,7 +38,7 @@
           <% if blog.image.present? %>
             <%= image_tag blog.image, size: '100x100' %>
           <% else %>
-            <%= image_tag 'default-cat.jpg', size: '100x100' %>
+            <%= image_tag 'blog-no-image.jpg', size: '100x100' %>
           <% end %>
           <p>タイトル: <%= blog.title %></p>
           <p>投稿日時: <%= blog.created_at.strftime("%Y/%m/%d %H:%M") %></p>
