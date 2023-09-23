@@ -30,8 +30,11 @@ Rails.application.routes.draw do
     post '/members/guest_sign_in', to: 'public/sessions#guest_sign_in'
   end
 
+
   scope module: :public do
     root to: 'homes#top'
+
+    get "search" => "searches#search"
 
     get 'members/mypage' => 'members#edit', as: 'mypage'
     patch 'members/mypage' => 'members#update', as: 'update_mypage'
@@ -42,13 +45,16 @@ Rails.application.routes.draw do
     resources :members, only: [:show, :index] do
       get 'blog_index' => 'blogs#blog_index', as: 'blog_index'
       get 'cat_index' => "cats#cat_index", as: 'cat_index'
+      get 'favorite_index' => "favorites#favorite_index", as: 'favorite_index'
     end
 
     resources :memos, only: [:create, :update, :destroy]
+
     resources :cats, only: [:show, :index, :create, :edit, :update, :destroy]
+
     resources :blogs, only: [:new, :show, :index, :create, :edit, :update, :destroy] do
       resources :blog_comments, only: [:create, :destroy]
-      resource :favorites, only: [:create, :destroy]
+      resource :favorites, only: [:create, :destroy,]
     end
 
     resources :communities do

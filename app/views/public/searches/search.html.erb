@@ -1,0 +1,54 @@
+<div class="container mt-3">
+  <h2>検索結果</h2>
+
+  <% if @range == "ブログ" %>
+    <h3>ブログ</h3>
+    <% if @blogs.any? %>
+      <table class="table table-hover table-inverse">
+        <tbody>
+          <% @blogs.each do |blog| %>
+            <tr>
+              <td><%= image_tag blog.image, size: '50x50' %></td>
+                <td><%= link_to blog_path(blog) do %>
+                     <%= blog.title %>
+                </td>
+                <td>
+                  <% if blog.member.profile_image.present? %>
+                   <%= image_tag blog.member.profile_image, class: "rounded-circle image_tag", size: "50x50" %>
+                  <% else %>
+                    <%= image_tag 'member-no-image.jpg', class: "rounded-circle image_tag", size: "50x50" %>
+                  <% end %>
+                  <%= blog.member.name %>さん
+                </td>
+                <td><i class="fa fa-commenting" aria-hidden="true"></i>
+                    <%= blog.blog_comments.count %>
+                </td>
+              <% end %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>検索結果が一致しませんでした。</p>
+    <% end %>
+  <% else %>
+    <h3>コミュニティ</h3>
+    <% if @communities.any? %>
+      <table class="table table-hover table-inverse">
+        <tbody>
+          <% @communities.each do |community| %>
+            <tr>
+              <td><%= image_tag community.image, size: '50x50' %></td>
+              <td><%= link_to community_path(community) do %>
+                <%= community.title %>
+              <% end %></td>
+              <td>トピックス数:<%= community.topics.count %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>検索結果が一致しませんでした。</p>
+    <% end %>
+  <% end %>
+</div>
