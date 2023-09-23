@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded',
+document.addEventListener('turbolinks:load',
   function() {
     let nav = document.querySelector("#navArea")
     let nav2 = document.querySelector("#navArea2")

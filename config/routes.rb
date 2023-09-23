@@ -38,19 +38,27 @@ Rails.application.routes.draw do
 
     get 'members/mypage' => 'members#edit', as: 'mypage'
     patch 'members/mypage' => 'members#update', as: 'update_mypage'
-    get 'members/unsubscribe' => 'members#unsubscribe', as: 'confirm_unsubscribe'
-    put 'members/information' => 'members#update'
+    get  '/members/check' => 'members#check', as: 'check_member'
     patch 'members/withdraw' => 'members#withdraw', as: 'withdraw_member'
 
     resources :members, only: [:show, :index] do
+      # collection do
+      #   get :mypage
+      #   patch :mypage_update
+      #   get :check
+      #   patch :withdraw
+      # end
+
+      # get :blogs
+
+      get :cats
+      get :favorites
       get 'blog_index' => 'blogs#blog_index', as: 'blog_index'
-      get 'cat_index' => "cats#cat_index", as: 'cat_index'
-      get 'favorite_index' => "favorites#favorite_index", as: 'favorite_index'
     end
 
     resources :memos, only: [:create, :update, :destroy]
 
-    resources :cats, only: [:show, :index, :create, :edit, :update, :destroy]
+    resources :cats, only: [:show, :create, :edit, :update, :destroy]
 
     resources :blogs, only: [:new, :show, :index, :create, :edit, :update, :destroy] do
       resources :blog_comments, only: [:create, :destroy]

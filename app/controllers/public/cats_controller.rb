@@ -1,17 +1,7 @@
 class Public::CatsController < ApplicationController
   before_action :set_cat, onry: [:show]
-  before_action :set_member, onry: [:show, :index]
+  before_action :set_member, onry: [:show]
 
-  def index
-    @cats = @member.cats.all
-    @cat = Cat.new
-  end
-
-  def cat_index
-    @member = Member.find(params[:member_id])
-    @cat = Cat.new
-    @cats = @member.cats
-  end
 
   def show
   end
@@ -35,7 +25,7 @@ class Public::CatsController < ApplicationController
   def update
     if @cat.update(cat_params)
       flash[:notice] = '猫ちゃんの情報が更新されました。'
-      redirect_to request.referer
+      redirect_to cat_path(@cat)
     else
       render 'index'
     end
@@ -44,11 +34,11 @@ class Public::CatsController < ApplicationController
   private
 
   def set_cat
-    @cat = Cat.find_by(params[:id])
+    @cat = Cat.find(params[:id])
   end
 
   def set_member
-    @member = Member.find_by(params[:id])
+    @member = Member.find(params[:id])
   end
 
 
