@@ -4,8 +4,20 @@ class Cat < ApplicationRecord
   belongs_to :breed
 
   has_one_attached :image
+  
+  validates :name, presence: true
+  validates :intruduction,    length: { in: 1..75 }
+  
 
   enum sex: { male: 0, female: 1 }
+  
+  def full_name
+    if female?
+      "#{name}ちゃん"
+    else
+      "#{name}くん"
+    end
+  end
 
 
   def save_breed(breed_name)

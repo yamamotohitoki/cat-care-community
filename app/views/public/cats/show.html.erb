@@ -4,7 +4,7 @@
     <div class="col-md-6 offset-md-3">
       <div class="text-center">
         <%= image_tag @cat.image, class: "rounded-circle", size: "150x150" %>
-        <h3><%= @cat.name %></h3>
+        <h3><%= @cat.full_name %></h3>
       </div>
       <table class="table table-bordered mt-4">
         <tbody>
@@ -26,7 +26,7 @@
           </tr>
           <tr>
             <th scope="row">性別</th>
-            <td><%= @cat.sex %></td>
+            <td><%= @cat.sex_i18n %></td>
           </tr>
           <tr>
             <th scope="row">家族になった日</th>
@@ -44,7 +44,7 @@
       </table>
     </div>
   </div>
-  <div class="text-center">
+  <div class="text-center mb-5">
    <% if @member == @cat.member %>
     <%= link_to "編集する", edit_cat_path(@cat), class: "btn btn-outline-success" %>
    <% end %>

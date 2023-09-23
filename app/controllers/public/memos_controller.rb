@@ -1,4 +1,5 @@
 class Public::MemosController < ApplicationController
+  before_action :authenticate_member!
 
   def create
     Memo.create(memo_parameter)

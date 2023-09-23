@@ -1,4 +1,5 @@
 class Public::MembersController < ApplicationController
+  before_action :authenticate_member!, except: [:show, :index, :cats, :favorites]
 
   def show
      @member = Member.find(params[:id])

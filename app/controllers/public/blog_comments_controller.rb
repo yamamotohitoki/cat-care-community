@@ -1,4 +1,5 @@
 class Public::BlogCommentsController < ApplicationController
+  before_action :authenticate_member!
   before_action :set_comment, only: [:destroy]
 
   def create

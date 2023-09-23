@@ -1,4 +1,5 @@
 class Public::FavoritesController < ApplicationController
+  before_action :authenticate_member!
   def create
     blog = Blog.find(params[:blog_id])
     favorite = current_member.favorites.new(blog_id: blog.id)

@@ -16,8 +16,9 @@ class Member < ApplicationRecord
 
   has_one_attached :profile_image
 
-  validates :introduction, length: { maximum: 250 }
-  validates :name, presence: true
+  validates :introduction, length: { in: 0..100 }
+  validates :name, presence: true, length: { in: 1..10 }
+
 
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |member|

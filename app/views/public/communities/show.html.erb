@@ -1,5 +1,5 @@
 <div class="container mt-3">
-  <%= render 'header', community: @community %>
+  <%= render 'main', community: @community %>
   <div class="card mt-5" style="width: 18rem;">
     <div class="card-header">
       トピック一覧
@@ -13,7 +13,7 @@
               <%= link_to topic.title, community_topic_path(@community, topic) %>
             </div>
             <div>
-             <i class="fa fa-commenting" aria-hidden="true"></i>
+             <i class="fa fa-commenting"></i>
               <%= topic.topic_comments.count %>
             </div>
           </li>
@@ -26,7 +26,7 @@
     </ul>
   </div>
 
-  <div class="text-center">
+  <div class="text-center mb-5">
   <%= link_to new_community_topic_path(@community), class: "btn btn-outline-info mt-3" do %>
     新しいトピックを作成する
   <% end %>

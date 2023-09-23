@@ -1,4 +1,5 @@
 class Public::TopicCommentsController < ApplicationController
+  before_action :authenticate_member!
   before_action :set_topic_comment, only: [:destroy]
 
   def create

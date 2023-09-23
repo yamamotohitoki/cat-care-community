@@ -6,7 +6,8 @@ class Topic < ApplicationRecord
 
   has_one_attached :image
 
-  validates :title, presence: true
-  validates :body, presence: true
+  validates :title, presence: true, length: { in: 1..20 }
+  validates :body, presence: true, length: { in: 1..100 }
   validates :image, presence: true
+
 end

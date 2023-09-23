@@ -66,6 +66,7 @@ Rails.application.routes.draw do
     end
 
     resources :communities do
+      resource :member_communities, only: [:create, :destroy]
       resources :topics, only: [:show, :new, :create, :edit, :update, :destroy] do
        resources :topic_comments, only: [:create, :destroy]
     end

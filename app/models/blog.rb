@@ -7,8 +7,9 @@ class Blog < ApplicationRecord
 
   has_one_attached :image
 
-  validates :title, presence: true
-  validates :body, presence: true
+  validates :title, presence: true, length: { in: 1..20 }
+  validates :introduction, presence: true, length: { in: 1..100 }
+   
   
   def favorited_by?(member)
     favorites.exists?(member_id: member.id)

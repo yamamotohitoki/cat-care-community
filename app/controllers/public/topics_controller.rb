@@ -1,4 +1,5 @@
 class Public::TopicsController < ApplicationController
+  before_action :authenticate_member!, except: [:show]
   before_action :set_topic, only: [:show, :edit, :update, :destroy]
   before_action :set_community, only: [:show, :new, :create]
 

@@ -1,13 +1,12 @@
 class Public::CatsController < ApplicationController
-  before_action :set_cat, onry: [:show]
+  before_action :authenticate_member!, except: [:show]
+  before_action :set_cat, onry: [:show, :edit]
   before_action :set_member, onry: [:show]
-
 
   def show
   end
 
   def edit
-    @cat = Cat.find(params[:id])
   end
 
 
@@ -18,7 +17,7 @@ class Public::CatsController < ApplicationController
       flash[:notice] = "猫ちゃんを登録しました"
       redirect_to cats_path(@cat)
     else
-       render 'index'
+      render 'members/cats'
     end
   end
 
@@ -27,7 +26,7 @@ class Public::CatsController < ApplicationController
       flash[:notice] = '猫ちゃんの情報が更新されました。'
       redirect_to cat_path(@cat)
     else
-      render 'index'
+      render 'edit'
     end
   end
 

@@ -1,4 +1,5 @@
 class Public::CommunitiesController < ApplicationController
+  before_action :authenticate_member!, except: [:show, :index]
   before_action :set_community, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -8,6 +9,7 @@ class Public::CommunitiesController < ApplicationController
   def show
    @topic = Topic.new
    @topics = @community.topics
+   @community = Community.find_by(params[:community_id])
   end
 
   def new
