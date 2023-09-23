@@ -9,6 +9,9 @@
           <div class="text-center">
             <p class="card-text"><%= @blog.body %></p>
           </div>
+
+          <div class="row">
+          <div class="col-8">
           <hr>
           <%= link_to member_path(@member) do %>
             <% if @blog.member.profile_image.present? %>
@@ -18,6 +21,29 @@
             <% end %>
             <%= @blog.member.name %>さん
           <% end %>
+          </div>
+          <div class="col-2 d-flex align-items-end">
+            <i class="fa fa-commenting"></i>
+            <%= @blog.blog_comments.count %>
+          </div>
+
+          <div class="col-2 d-flex align-items-end">
+             <% if @blog.favorited_by?(current_member) %>
+
+                <%= link_to blog_favorites_path(@blog), method: :delete do %>
+                  ♥<%= @blog.favorites.count %>
+                <% end %>
+
+                <% else %>
+
+                <%= link_to blog_favorites_path(@blog), method: :post do %>
+                  ♡<%= @blog.favorites.count %>
+                <% end %>
+
+            <% end %>
+          </div>
+          </div>
+
         </div>
       </div>
     </div>

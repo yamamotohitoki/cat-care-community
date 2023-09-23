@@ -48,6 +48,7 @@ Rails.application.routes.draw do
     resources :cats, only: [:show, :index, :create, :edit, :update, :destroy]
     resources :blogs, only: [:new, :show, :index, :create, :edit, :update, :destroy] do
       resources :blog_comments, only: [:create, :destroy]
+      resource :favorites, only: [:create, :destroy]
     end
 
     resources :communities do
