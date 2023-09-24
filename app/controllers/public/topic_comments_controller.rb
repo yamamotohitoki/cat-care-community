@@ -3,15 +3,17 @@ class Public::TopicCommentsController < ApplicationController
   before_action :set_topic_comment, only: [:destroy]
 
   def create
-    @topic = Topic.find(params[:topic_id])
-    @comment = @topic.topic_comments.new(comment_params)
-    @comment.member = current_member
+    topic = Topic.find(params[:topic_id])
+    comment = current_member.topic_comments.new(comment_params)
 
-    if @comment.save
+    comment.topic_id = topic.id
+
+    if comment.save!
       flash[:notice] = 'コメントが投稿されました'
       redirect_to request.referer
     else
-      flash[:error] = 'コメントの投稿に失敗しました'
+      binding.pry
+      flash[:alert] = 'コメントの投稿に失敗しました'
       redirect_to request.referer
     end
   end

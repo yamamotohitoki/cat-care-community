@@ -10,8 +10,9 @@ class Public::BlogCommentsController < ApplicationController
 
     if comment.save
       flash[:notice] = 'コメントが投稿されました。'
-      redirect_to blog_path(blog)
+      redirect_to request.referer
     else
+      flash[:alert] = 'コメントの投稿に失敗しました'
       render 'blogs/show'
     end
   end
@@ -21,7 +22,7 @@ class Public::BlogCommentsController < ApplicationController
       @comment.destroy
       flash[:notice] = "コメントが削除されました。"
     else
-      flash[:error] = "コメントを削除できません。"
+      flash[:alert] = "コメントを削除できません。"
     end
     redirect_to request.referer
   end

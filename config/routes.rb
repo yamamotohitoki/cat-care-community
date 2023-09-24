@@ -15,9 +15,11 @@ Rails.application.routes.draw do
       resources :blog_comments, only: [:destroy]
     end
 
-    resources :communities, only: [:index, :show, :destroy]
-    resources :topics, only: [:index, :show, :destroy]
-    resources :topic_comments, only: [:destroy]
+    resources :communities, only: [:index, :show, :destroy] do
+      resources :topics, only: [ :show, :destroy] do
+        resources :topic_comments, only: [:destroy]
+      end
+    end
   end
 
   # 会員用
@@ -41,7 +43,7 @@ Rails.application.routes.draw do
     get  '/members/check' => 'members#check', as: 'check_member'
     patch 'members/withdraw' => 'members#withdraw', as: 'withdraw_member'
 
-    resources :members, only: [:show, :index] do
+    resources :members, only: [:show, :index, :create] do
       # collection do
       #   get :mypage
       #   patch :mypage_update

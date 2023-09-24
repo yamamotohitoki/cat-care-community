@@ -1,20 +1,28 @@
-<div class="container mt-3">
-  <h1 class="text-center">コミュニティ一覧</h1>
-  <div class="card mb-3" style="max-width: 540px;">
-    <div class="row g-0">
-      <% @communities.each do |community| %>
-        <div class="col-md-4">
-          <%= image_tag community.image, class: "img-fluid rounded-start" %>
-        </div>
-        <div class="col-md-8">
+  <div class=container>
+  <div class="row">
+    <% @communities.each do |community| %>
+      <div class="col-md-3 mb-4">
+        <div class="card h-100">
+          <div class="card-header">
+            <h5 class="card-title community-title"><%= community.title %></h5>
+          </div>
+          <%= image_tag community.image, class: 'card-img-top community-image', alt: 'Community Image', style: 'height: 100px;' %>
           <div class="card-body">
-            <h5 class="card-title"><%= community.title %></h5>
-            <p class="card-text"><%= community.body %></p>
-            <p class="card-text"><small class="text-body-secondary"><%= community.created_at.strftime("%Y/%m/%d %H:%M") %></small></p>
-            <%= link_to "詳細", admin_community_path(community), class: "btn btn-primary" %>
+            <p class="card-text community-body"><%= community.body %></p>
+          </div>
+          <div class="card-footer d-flex justify-content-between align-items-center">
+            <%= link_to '詳細', admin_community_path(community), class: 'btn btn-outline-primary btn-sm' %>
+            <div class="d-flex align-items-center">
+              <i class="fa-regular fa-user"></i>
+              <%= community.member_communities.count %>
+            </div>
+            <div class="d-flex align-items-center">
+              <i class="fa-regular fa-calendar-days"></i>
+              <%= community.created_at.strftime("%Y-%m-%d") %>
+            </div>
           </div>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
 </div>

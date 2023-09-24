@@ -15,9 +15,8 @@
           <% else %>
             <%= image_tag 'cat-no-image.jpg', width: 220, height: 160, class: "img-resize, rounded mx-auto d-block", style: "object-fit: cover;" %>
           <% end %>
-
           <div class="card-body text-center">
-            <h5 class="card-title"><%= cat.name %>ちゃん</h5>
+            <h5 class="card-title"><%= cat.full_name %></h5>
             <% end %>
           </div>
         </div>
@@ -50,5 +49,6 @@
         <% end %>
       </div>
     <% end %>
+  </div>
 </div>
 

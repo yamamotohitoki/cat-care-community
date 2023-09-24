@@ -42,6 +42,7 @@
           <div class="card-body">
             <h5 class="card-title">飼い猫を追加</h5>
             <%= form_with model: @cat, url: cats_path, method: :post do |f| %>
+              <%= render "public/shared/error_messages", resource: f.object %>
               <div class="mb-3">
                 <%= f.label :image, '猫の写真', class: 'form-label' %>
                 <%= f.file_field :image, class: 'form-control' %>

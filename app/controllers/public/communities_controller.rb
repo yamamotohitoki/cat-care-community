@@ -9,7 +9,6 @@ class Public::CommunitiesController < ApplicationController
   def show
    @topic = Topic.new
    @topics = @community.topics
-   @community = Community.find_by(params[:community_id])
   end
 
   def new

@@ -9,9 +9,10 @@ class Community < ApplicationRecord
   validates :title, presence: true, length: { in: 1..20 }
   validates :body, presence: true, length: { in: 1..100 }
   validates :image, presence: true
-  
+
 
   def includes?(member)
+    return false if member.nil?
     member_communities.exists?(member_id: member.id)
   end
 

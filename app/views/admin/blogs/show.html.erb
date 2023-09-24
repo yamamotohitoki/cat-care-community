@@ -39,8 +39,8 @@
             <p class="card-text">
               <%= comment.comment %>
             </p>
-            <% if current_member && (comment.member_id == current_member.id) %>
-              <%= link_to "削除", blog_blog_comment_path(@blog, comment), method: :delete, data: { confirm: "このコメントを削除しますか？" }, class: 'btn btn-danger btn-sm float-right' %>
+            <% if admin_signed_in? %>
+              <%= link_to "削除", admin_blog_blog_comment_path(@blog, comment), method: :delete, data: { confirm: "このコメントを削除しますか？" }, class: 'btn btn-danger btn-sm float-right' %>
             <% end %>
           </div>
         </div>

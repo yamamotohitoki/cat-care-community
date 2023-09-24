@@ -5,7 +5,7 @@ ja:
         public: "公開する"
         private: "非公開にする"
     cat:
-     sex:
+    sex:
       male: "男の子"
       female: "女の子"
   activerecord:

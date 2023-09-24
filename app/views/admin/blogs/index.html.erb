@@ -2,7 +2,7 @@
   <h1 class="text-center mx-3 my-3 ">ブログ一覧</h1>
   <div class="row">
     <% @blogs.each do |blog| %>
-    <%= link_to blog_path(blog) do %>
+    <%= link_to admin_blog_path(blog) do %>
       <div class="col-md-3">
         <div class="card mb-3">
           <% if blog.image.present? %>
@@ -11,7 +11,7 @@
             <%= image_tag 'blog-no-image.jpg', width: 220, height: 160, class: "img-resize, rounded mx-auto d-block", style: "object-fit: cover;" %>
           <% end %>
           <div class="card-body">
-            <p class="card-title">タイトル: <%= blog.title %></p><hr>
+            <p class="card-title"><%= blog.title %></p><hr>
             <p class="card-text">投稿者: <%= blog.member.name %>さん</p><hr>
             <p class="card-text">投稿日時: <%= blog.created_at.strftime("%Y/%m/%d %H:%M") %></p>
           </div>

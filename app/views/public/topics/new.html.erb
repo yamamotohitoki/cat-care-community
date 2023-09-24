@@ -1,5 +1,5 @@
-<%= render 'public/communities/header', community: @community %>
-<%= render 'public/layouts/error_messages', topic: @topic %>
+<%= render 'public/communities/main', community: @community %>
+
 <div class="container mt-5">
   <h2>トピック作成フォーム</h1>
 <%= form_with model: @topic, url: community_topics_path(@community), method: :post do |form| %>
@@ -18,8 +18,8 @@
     <%= form.file_field :image, class: "form-control-file" %>
   </div>
   <%= form.hidden_field :community_id, value: @community.id %>
-  <div class="form-actions text-center">
-    <%= form.submit "トピックを作成する", class: "btn btn-primary" %>
+  <div class="form-actions text-center mb-5">
+    <%= form.submit "トピックを作成する", class: "btn btn-outline-primary" %>
   </div>
 <% end %>
 </div>

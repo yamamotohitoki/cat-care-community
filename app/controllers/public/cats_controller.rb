@@ -1,9 +1,11 @@
 class Public::CatsController < ApplicationController
   before_action :authenticate_member!, except: [:show]
-  before_action :set_cat, onry: [:show, :edit]
-  before_action :set_member, onry: [:show]
+  # before_action :set_cat, onry: [:show, :edit]
+  # before_action :set_member, onry: [:show]
 
   def show
+    @member = Member.find(params[:id])
+    @cat = set_cat(params[:id])
   end
 
   def edit
@@ -13,11 +15,15 @@ class Public::CatsController < ApplicationController
   def create
     @cat = current_member.cats.new(cat_params)
     @cat.save_breed(params[:cat][:breed_name])
+    @member = set_member(params[:member_id])
+
+    # binding.pry
     if @cat.save
       flash[:notice] = "猫ちゃんを登録しました"
-      redirect_to cats_path(@cat)
+      redirect_to cat_path(@cat)
     else
-      render 'members/cats'
+      breed_valid(@cat, params[:cat][:breed_name])
+      render 'public/members/cats'
     end
   end
 
@@ -32,12 +38,22 @@ class Public::CatsController < ApplicationController
 
   private
 
-  def set_cat
-    @cat = Cat.find(params[:id])
+  def set_cat(cat_id)
+    Cat.find(cat_id)
   end
 
-  def set_member
-    @member = Member.find(params[:id])
+  def set_member(member_id)
+    Member.find(member_id)
+  end
+
+  def breed_valid(instance, breed_name)
+    if breed_name.length == 0
+      instance.errors.add(:breed_name, "1文字以上で入力してください")
+    end
+
+    if breed_name.length > 25
+      instance.errors.add(:breed_name, "25文字以内で入力してください")
+    end
   end
 
 

@@ -2,17 +2,17 @@
   <div class="card">
     <div class="row">
       <div class="col-12">
-        <%= image_tag community.image, style: 'width: 100%; height: 200px;' %>
+        <% if community.image.present? %>
+          <%= image_tag community.image, style: 'width: 100%; height: 200px;' %>
+        <% else %>
+          <%= image_tag 'blog-no-image.jpg', style: 'width: 100%; height: 200px;' %>
+        <% end %>
       </div>
     </div>
     <div class="d-flex bd-highlight mt-3">
       <div class="p-2 bd-highlight"><h4><%= community.title %></h4><hr></div>
       <div class="mx-auto">
-        <% if community.includes?(current_member)%>
-　　      <%= link_to 'コミュニティを抜ける', community_member_communities_path(community), method: :delete, class: "btn btn-sm  btn-outline-danger" %>
-        <% else %>
-　　      <%= link_to 'コミュニティに参加する', community_member_communities_path(community), method: :post, class: "btn btn-sm btn-outline-primary" %>
-        <% end %>
+        <%= link_to 'コミュニティを削除', admin_community_path(community), method: :delete, class: "btn btn-sm btn-outline-danger" %>
       </div>
     </div>
     <div class="text-center">
@@ -40,7 +40,7 @@
           <%= member.name %>さん
         </td>
         <td>
-       <%= link_to '詳細', member_path(member), class: 'btn btn-outline-primary btn-sm' %>
+       <%= link_to '詳細', admin_member_path(member), class: 'btn btn-outline-primary btn-sm' %>
        </td>
       </tr>
     <% end %>
