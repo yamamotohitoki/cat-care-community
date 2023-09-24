@@ -1,5 +1,5 @@
 class Public::BlogsController < ApplicationController
-
+  before_action :authenticate_member!, except: [:show, :index, :blog_index]
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
 
   def new

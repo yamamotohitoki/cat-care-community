@@ -1,0 +1,51 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="row">
+      <div class="col-12">
+        <%= image_tag community.image, style: 'width: 100%; height: 200px;' %>
+      </div>
+    </div>
+    <div class="d-flex bd-highlight mt-3">
+      <div class="p-2 bd-highlight"><h4><%= community.title %></h4><hr></div>
+      <div class="mx-auto">
+        <% if community.includes?(current_member)%>
+　　      <%= link_to 'コミュニティを抜ける', community_member_communities_path(community), method: :delete, class: "btn btn-sm  btn-outline-danger" %>
+        <% else %>
+　　      <%= link_to 'コミュニティに参加する', community_member_communities_path(community), method: :post, class: "btn btn-sm btn-outline-primary" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="text-center">
+      <p><%= community.body %></p>
+    </div>
+  </div>
+</div>
+<div class="container">
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">参加メンバー</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% community.members.each do |member| %>
+      <tr>
+        <td>
+          <% if member.profile_image.attached? %>
+            <%= image_tag member.profile_image, size: "50x50", class: "rounded-circle" %>
+          <% else %>
+            <%= image_tag 'member-no-image.jpg', size: "50x50", class: "rounded-circle" %>
+          <% end %>
+          <%= member.name %>さん
+        </td>
+        <td>
+       <%= link_to '詳細', member_path(member), class: 'btn btn-outline-primary btn-sm' %>
+       </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+

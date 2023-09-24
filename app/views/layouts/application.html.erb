@@ -14,12 +14,16 @@
 
   <body>
     <%= render 'layouts/header' %>
+
     <% if flash[:notice] %>
         <p class="alert alert-success"><%= notice %></p>
       <% elsif flash[:alert] %>
         <p class="alert alert-danger"><%= alert %></p>
     <% end %>
+
     <%= yield %>
+
     <%= render 'layouts/footer' %>
+
   </body>
 </html>

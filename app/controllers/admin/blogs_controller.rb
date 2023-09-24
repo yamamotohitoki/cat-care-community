@@ -15,14 +15,10 @@ class Admin::BlogsController < ApplicationController
     @member = Member.find(params[:id])
   end
 
-  def edit
-    @blog = Blog.find(params[:id])
-  end
-
   def destroy
     @blog = Blog.find(params[:id])
     if @book.destroy
-      redirect_to request.referer
+      redirect_to admin_blogs_path
     else
       render 'show'
     end

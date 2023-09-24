@@ -1,4 +1,5 @@
 class Public::TopicsController < ApplicationController
+  before_action :authenticate_member!, except: [:show]
   before_action :set_topic, only: [:show, :edit, :update, :destroy]
   before_action :set_community, only: [:show, :new, :create]
 
@@ -16,9 +17,10 @@ class Public::TopicsController < ApplicationController
 
     if @topic.save
       flash[:notice] = 'トピックが作成されました'
-      redirect_to request.referer
+      redirect_to community_topic_path(@community, @topic)
     else
-      render 'show'
+      Rails.logger.error(@topic.errors.full_messages)
+      render 'new'
     end
   end
 
@@ -45,11 +47,11 @@ class Public::TopicsController < ApplicationController
     end
 
     def set_community
-      @community = Community.find_by(params[:community_id])
+      @community = Community.find(params[:community_id])
     end
 
     def topic_params
-      params.require(:topic).permit(:title, :body, :image)
+      params.require(:topic).permit(:title, :body, :image, :community_id)
     end
 end
 

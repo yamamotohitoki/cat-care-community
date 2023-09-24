@@ -1,35 +1,23 @@
-<div class="container mt-3">
-  <h1>投稿一覧</h1>
+<div class="container">
+  <h1 class="text-center mx-3 my-3 ">ブログ一覧</h1>
   <div class="row">
     <% @blogs.each do |blog| %>
-      <div class="col-md-4 mb-4">
-        <div class="card" style="width: 18rem;">
-          <%= image_tag blog.image, width: '100%', height: '50px' %>
+    <%= link_to blog_path(blog) do %>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <% if blog.image.present? %>
+            <%= image_tag blog.image, width: 220, height: 160, class: "img-resize, rounded mx-auto d-block", style: "object-fit: cover;" %>
+          <% else %>
+            <%= image_tag 'blog-no-image.jpg', width: 220, height: 160, class: "img-resize, rounded mx-auto d-block", style: "object-fit: cover;" %>
+          <% end %>
           <div class="card-body">
-            <h5 class="card-title"><%= blog.title %></h5>
-            <p class="card-text text-limit"><%= blog.body %></p>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-              投稿者:<% if blog.member.profile_image.present? %>
-                <%= image_tag blog.member.profile_image, size: '50x50', class: 'rounded-circle' %>
-              <% else %>
-                <%= image_tag 'member-no-image.jpg', size: '50x50', class: 'rounded-circle' %>
-              <% end %>
-              <%= blog.member.name %>さん
-            </li>
-            <li class="list-group-item">投稿日時：<%= blog.created_at.strftime("%Y/%m/%d %H:%M") %></li>
-          </ul>
-          <div class="card-body">
-            <div class="btn-group d-flex justify-content-between">
-              <%= link_to 'ブログ詳細', blog_path(blog), class: 'btn btn-primary mr-4' %>
-              <%= link_to '会員詳細', member_path(blog.member), class: 'btn btn-secondary' %>
-            </div>
+            <p class="card-title">タイトル: <%= blog.title %></p><hr>
+            <p class="card-text">投稿者: <%= blog.member.name %>さん</p><hr>
+            <p class="card-text">投稿日時: <%= blog.created_at.strftime("%Y/%m/%d %H:%M") %></p>
           </div>
         </div>
+        <% end %>
       </div>
     <% end %>
-  </div>
+   </div>
 </div>
-
-

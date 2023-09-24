@@ -1,21 +1,29 @@
-<div class="hero vh-100 d-flex align-items-center" id="home">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 mx-auto text-center text-light">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 position-relative">
+      <%= image_tag "top.jpg" %>
+      <div class="text-light position-absolute" style="top: 209px; left: 108px;">
         <h1>ようこそ、キャットケアコミュニティへ！</h1>
+        <div class="mx-auto text-center">
         <p class="text my-3">
           このサイトは猫ちゃんの健康の管理、ブログの投稿、
           猫好きの集まるコミュニティなど、<br>
           猫好きの方々ががつながれるコミュニティサイトになります<br>
         </p>
-        <%= link_to '新規会員登録(無料)', new_member_registration_path, class: 'btn btn-outline-danger' %>
-        <div>
-          <%= link_to 'ゲストログイン', members_guest_sign_in_path, method: :post, class: 'btn btn-outline-primary mt-3' %>
+        </div>
+        <div class="mt-5">
+          <div class="mx-auto text-center">
+            <% unless member_signed_in? %>
+              <%= link_to '新規会員登録(無料)', new_member_registration_path, class: 'btn btn-outline-danger' %>
+            <% end %>
+          </div>
+          <div class="mx-auto text-center">
+            <% unless member_signed_in? %>
+              <%= link_to 'ゲストログイン', members_guest_sign_in_path, method: :post, class: 'btn btn-outline-primary mt-3' %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-

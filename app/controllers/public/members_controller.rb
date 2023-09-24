@@ -1,7 +1,8 @@
 class Public::MembersController < ApplicationController
+  before_action :authenticate_member!, except: [:show, :index, :cats, :favorites]
 
   def show
-     @member = Member.find_by(params[:id])
+     @member = Member.find(params[:id])
      @cats = @member.cats.all
      @blogs = @member.blogs.all
      @communities = @member.communities.all
@@ -32,13 +33,29 @@ class Public::MembersController < ApplicationController
     end
   end
 
+  def withdraw
+    @member = Member.find(current_member.id)
+    @member.update(is_active: false)
+    reset_session
+    flash[:notice] = "退会処理を実行いたしました"
+    redirect_to root_path
+  end
+
+  def cats
+    @member = Member.find(params[:member_id])
+    @cat = Cat.new
+  end
+
+  def favorites
+    @member = Member.find(params[:member_id])
+    @blogs = @member.favorite_blogs
+  end
 
   private
 
   def member_params
     params.require(:member).permit(:profile_image, :name, :introduction)
   end
-
 end
 
 

@@ -4,10 +4,10 @@ class CreateCats < ActiveRecord::Migration[6.1]
       t.integer :member_id, null: false
       t.integer :breed_id, null: false
       t.string :name, null: false
-      t.string :birthday
-      t.string :sex
+      t.date :birthday
+      t.integer :sex, default: "0"
       t.text :introduction
-      t.string :family_join_day
+      t.date :family_join_day
       t.integer :weight
       t.integer :ideal_weight
       t.timestamps

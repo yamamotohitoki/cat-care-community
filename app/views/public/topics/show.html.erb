@@ -1,29 +1,24 @@
+<%= render 'public/communities/main', community: @community %>
 
 <div class="container">
-  <%= render 'public/communities/header', community: @community %>
-  <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
-    <div class="col-md-6">
-      <div class="card">
-        <%= image_tag @topic.image, class: "card-img-top", size: "100x100" if @topic.image.attached? %>
-        <div class="card-body">
-          <h1 class="card-title text-center" style="font-size: 1.5rem;"><%= @topic.title %></h1>
-          <hr>
-          <div class="text-center">
-            <p class="card-text"><%= @topic.body %></p>
-          </div>
-          <hr>
-            <% if @topic.image.present? %>
-              <%= image_tag @topic.image, class: "rounded-circle image_tag", size: "50x50" %>
-            <% else %>
-              <%= image_tag 'blog-no-image.jpg', class: "rounded-circle image_tag", size: "50x50" %>
-            <% end %>
-        </div>
-      </div>
-    </div>
+  <div class="card mb-3">
+    <% if @topic.image.present? %>
+      <%= image_tag @topic.image, width: 1000, height: 160, class: "img-resize, rounded mx-auto d-block", style: "object-fit: cover;" %>
+    <% else %>
+      <%= image_tag 'blog-no-image.jpg', width: 220, height: 160, class: "img-resize, rounded mx-auto d-block", style: "object-fit: cover;" %>
+    <% end %>
+  <div class="card-body">
+    <h5 class="card-title"><%= @topic.title %></h5>
+    <p class="card-text"><%= @topic.body %></p>
+    <p class="card-text"><small class="text-muted"><%= @topic.created_at.strftime("%Y-%m-%d %H:%M:%S") %></small></p>
   </div>
+  </div>
+</div>
+
+
+<div class= container>
   <div class="row">
     <div class="col-md-12">
-      <h2>チャット</h2>
       <% if @comments.present? %>
         <% @comments.each do |comment| %>
           <% if comment.member.profile_image.present? %>
@@ -32,15 +27,14 @@
             <%= image_tag 'member-no-image.jpg', class: "rounded-circle image_tag", size: "50x50" %>
           <% end %>
           <%= comment.member.name %>さん
+          <small class="text-muted"><%= comment.created_at.strftime("%Y-%m-%d %H:%M:%S") %></small>
           <div class="card mb-2">
             <div class="card-body">
-              <p class="comment-author">
-              </p>
               <p class="card-text">
                 <%= comment.comment %>
               </p>
               <% if current_member && comment.member_id == current_member.id %>
-                <%= link_to "削除", topic_topic_comment_path(@topic, comment), method: :delete, data: { confirm: "このコメントを削除しますか？" }, class: 'btn btn-danger btn-sm float-right' %>
+                <%= link_to "削除", community_topic_topic_comment_path(@community, @topic, comment), method: :delete, data: { confirm: "このコメントを削除しますか？" }, class: 'btn btn-danger btn-sm float-right' %>
               <% end %>
             </div>
           </div>
@@ -52,12 +46,13 @@
   </div>
   <div class="row mt-3">
     <div class="col-md-12">
-      <h3>コメントを投稿する</h3>
-      <%= form_with(model: @comment, url: topic_topic_comments_path(@topic), method: :post) do |f| %>
+      <%= form_with(model: @comment, url: community_topic_topic_comments_path(@community,@topic), method: :post) do |f| %>
         <div class="form-group">
           <%= f.text_area :comment, placeholder: 'コメントを入力してください', class: 'form-control' %>
         </div>
-        <%= f.submit 'コメントする', class: 'btn btn-primary' %>
+        <div class="text-right mb-5">
+          <%= f.submit 'コメントする', class: 'btn btn-outline-primary' %>
+        </div>
       <% end %>
     </div>
   </div>

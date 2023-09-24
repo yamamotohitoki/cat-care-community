@@ -16,18 +16,21 @@
       </div>
 
       <div class="row mt-5 text-center">
-        <div class="col-3">
-          <%= link_to member_cat_index_path(member) do %>
+        <div class="col-4">
+          <%= link_to member_cats_path(member) do %>
             猫ちゃん: <%= member.cats.count %>匹
           <% end %>
         </div>
-        <div class="col-3">
+        <div class="col-4">
           <%= link_to member_blog_index_path(member) do %>
             投稿一覧: <%= member.blogs.count %>件
           <% end %>
         </div>
-        <div class="col-3">お気に入り: </div>
-        <div class="col-3">参加コミュニティ: </div>
+        <div class="col-4">
+           <%= link_to member_favorites_path(member) do %>
+             お気に入り: <%= member.favorites.count %>件
+           <% end %>
+        </div>
       </div>
     </div>
   </div>

@@ -10,20 +10,20 @@
      <%= link_to cat_path(cat) do %>
       <div class="col-md-4">
         <div class="card">
-          <% if cat.image.present? %>
-            <%= image_tag cat.image, class: "card-img-top rounded-circle", alt: "#{cat.name}ちゃんの画像" %>
+         <% if cat.image.present? %>
+            <%= image_tag cat.image, width: 220, height: 160, class: "img-resize, rounded mx-auto d-block", style: "object-fit: cover;" %>
           <% else %>
-            <%= image_tag 'default-cat.jpg', class: "card-img-top rounded-circle", alt: "デフォルトの猫の画像" %>
+            <%= image_tag 'cat-no-image.jpg', width: 220, height: 160, class: "img-resize, rounded mx-auto d-block", style: "object-fit: cover;" %>
           <% end %>
           <div class="card-body text-center">
-            <h5 class="card-title"><%= cat.name %>ちゃん</h5>
+            <h5 class="card-title"><%= cat.full_name %></h5>
             <% end %>
           </div>
         </div>
       </div>
     <% end %>
   </div>
-  <div class="text-center"><%= link_to 'もっと見る', cats_path %></div>
+  <div class="text-center"><%= link_to 'もっと見る', member_cats_path(@member) %></div>
   <% end %>
 </div>
 
@@ -32,20 +32,23 @@
 <h2 class="text-center"><%= @member.name %>さんの投稿</h2>
 <div class="row">
   <% @blogs.each do |blog| %>
+    <%= link_to blog_path(blog) do %>
       <div class="col-md-3">
-        <div class="text-center">
-          <%= link_to blog_path(blog) do %>
+        <div class="card mb-3">
           <% if blog.image.present? %>
-            <%= image_tag blog.image, size: '100x100' %>
+            <%= image_tag blog.image, width: 220, height: 160, class: "img-resize, rounded mx-auto d-block", style: "object-fit: cover;" %>
           <% else %>
-            <%= image_tag 'default-cat.jpg', size: '100x100' %>
+            <%= image_tag 'blog-no-image.jpg', width: 220, height: 160, class: "img-resize, rounded mx-auto d-block", style: "object-fit: cover;" %>
           <% end %>
-          <p>タイトル: <%= blog.title %></p>
-          <p>投稿日時: <%= blog.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+          <div class="card-body">
+            <p class="card-title">タイトル: <%= blog.title %></p><hr>
+            <p class="card-text">投稿者: <%= blog.member.name %>さん</p><hr>
+            <p class="card-text">投稿日時: <%= blog.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+          </div>
         </div>
+        <% end %>
       </div>
     <% end %>
-  <% end %>
-</div>
+  </div>
 </div>
 
