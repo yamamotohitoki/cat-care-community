@@ -1,27 +1,41 @@
-<div class="container">
-  <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
-    <div class="col-md-6">
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
       <div class="card">
-        <%= image_tag @blog.image, class: "card-img-top", size: "100x100" if @blog.image.attached? %>
+        <% if @blog.image.present? %>
+          <%= image_tag @blog.image, class: "card-img-top img-fluid", style: "object-fit: cover;" %>
+        <% else %>
+          <%= image_tag 'blog-no-image.jpg', class: "card-img-top img-fluid", style: "object-fit: cover;" %>
+        <% end %>
         <div class="card-body">
-          <h1 class="card-title text-center" style="font-size: 1.5rem;"><%= @blog.title %></h1>
-          <hr>
-          <div class="text-center">
-            <p class="card-text"><%= @blog.body %></p>
-          </div>
-          <hr>
-          <%= link_to member_path(@member) do %>
+          <h1 class="card-title"><%= @blog.title %></h1>
+          <p class="card-text"><%= @blog.body %></p>
+          <%= link_to "削除", admin_blog_path(@blog), method: :delete, data: { confirm: "この投稿を削除しますか？" }, class: 'btn btn-outline-danger btn-sm float-right' %>
+        </div>
+        <div class="card-body">
+          <div class="media">
             <% if @blog.member.profile_image.present? %>
-              <%= image_tag @blog.member.profile_image, class: "rounded-circle image_tag", size: "50x50" %>
+              <%= image_tag @blog.member.profile_image, class: "mr-3 rounded-circle", size: "50x50" %>
             <% else %>
-              <%= image_tag 'member-no-image.jpg', class: "rounded-circle image_tag", size: "50x50" %>
+              <%= image_tag 'member-no-image.jpg', class: "mr-3 rounded-circle", size: "50x50" %>
             <% end %>
-            <%= @blog.member.name %>さん
-          <% end %>
+            <div class="media-body">
+              <h5 class="mt-3"><%= @blog.member.name %>さん</h5>
+            </div>
+          </div>
+          <div class="float-right">
+            <i class="far fa-comment"></i> <%= @blog.blog_comments.count %>
+            <i class="fas fa-heart"></i> <%= @blog.favorites.count %>
+          </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+
+
+<div class="container">
   <div class="row mt-3">
     <div class="col-md-12">
       <h2>コメント</h2>
@@ -40,21 +54,10 @@
               <%= comment.comment %>
             </p>
             <% if admin_signed_in? %>
-              <%= link_to "削除", admin_blog_blog_comment_path(@blog, comment), method: :delete, data: { confirm: "このコメントを削除しますか？" }, class: 'btn btn-danger btn-sm float-right' %>
+              <%= link_to "削除", admin_blog_blog_comment_path(@blog, comment), method: :delete, data: { confirm: "このコメントを削除しますか？" }, class: 'btn btn-outline-danger btn-sm float-right' %>
             <% end %>
           </div>
         </div>
-      <% end %>
-    </div>
-  </div>
-  <div class="row mt-3">
-    <div class="col-md-12">
-      <h3>コメントを投稿する</h3>
-      <%= form_with(model: BlogComment.new, url: blog_blog_comments_path(@blog), method: :post) do |f| %>
-        <div class="form-group">
-          <%= f.text_area :comment, placeholder: 'コメントを入力してください', class: 'form-control' %>
-        </div>
-        <%= f.submit 'コメントする', class: 'btn btn-primary' %>
       <% end %>
     </div>
   </div>

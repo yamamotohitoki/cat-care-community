@@ -41,8 +41,11 @@
             <%= image_tag 'blog-no-image.jpg', width: 220, height: 160, class: "img-resize, rounded mx-auto d-block", style: "object-fit: cover;" %>
           <% end %>
           <div class="card-body">
-            <p class="card-title">タイトル: <%= blog.title %></p><hr>
-            <p class="card-text">投稿者: <%= blog.member.name %>さん</p><hr>
+            <p class="card-title"><%= blog.title %></p><hr>
+            <p class="card-text">
+              <i class="fa-regular fa-comment"></i><%= blog.blog_comments.count %>
+              <i class="fa-solid fa-heart pl-3"></i><%= blog.favorites.count %>
+            </p><hr>
             <p class="card-text">投稿日時: <%= blog.created_at.strftime("%Y/%m/%d %H:%M") %></p>
           </div>
         </div>

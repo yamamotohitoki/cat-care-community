@@ -35,7 +35,7 @@
       <% end %>
     </div>
 
-    <div class="col-md-4 mt-4">
+    <div class="col-md-4 mt-4 mb-3">
       <% if current_member == @member %>
         <div class="card">
           <div class="card-body">
@@ -87,7 +87,7 @@
                 <%= f.number_field :ideal_weight, class: 'form-control', step: '0.1', placeholder: '理想の体重（kg）' %>
               </div>
               <%= hidden_field_tag "member_id", params[:member_id] %>
-              <%= f.submit '猫ちゃんを追加する', class: 'btn btn-primary' %>
+              <%= f.submit '猫ちゃんを追加する', class: 'btn btn-outline-primary btn-sm' %>
             <% end %>
           </div>
         </div>
