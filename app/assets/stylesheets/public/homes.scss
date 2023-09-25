@@ -2,18 +2,4 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-.hero {
-  background-image: image-url("/assets/top.jpg");
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed;
-
-  .col-lg-8 {
-     padding-bottom: 200px;
-  }
-
-  h1 {
-    font-size: 30px;
-  }
-}
 

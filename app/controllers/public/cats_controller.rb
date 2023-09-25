@@ -1,14 +1,14 @@
 class Public::CatsController < ApplicationController
   before_action :authenticate_member!, except: [:show]
-  # before_action :set_cat, onry: [:show, :edit]
-  # before_action :set_member, onry: [:show]
 
   def show
-    @member = Member.find(params[:id])
     @cat = set_cat(params[:id])
+    @member = @cat.member
   end
 
   def edit
+    @cat = set_cat(params[:id])
+    @member = @cat.member
   end
 
 
@@ -17,7 +17,7 @@ class Public::CatsController < ApplicationController
     @cat.save_breed(params[:cat][:breed_name])
     @member = set_member(params[:member_id])
 
-    # binding.pry
+
     if @cat.save
       flash[:notice] = "猫ちゃんを登録しました"
       redirect_to cat_path(@cat)
@@ -28,6 +28,7 @@ class Public::CatsController < ApplicationController
   end
 
   def update
+    @cat = Cat.find(params[:id])
     if @cat.update(cat_params)
       flash[:notice] = '猫ちゃんの情報が更新されました。'
       redirect_to cat_path(@cat)

@@ -4,11 +4,10 @@
     <div class="col-md-6 offset-md-3">
       <div class="text-center">
        <% if @cat.image.present? %>
-  <%= image_tag @cat.image, class: "rounded-circle", size: "150x150" %>
-<% else %>
-  <%= image_tag "cat-no-image.jpg", class: "rounded-circle", size: "150x150" %>
-<% end %>
-
+         <%= image_tag @cat.image, class: "rounded-circle", size: "150x150" %>
+       <% else %>
+         <%= image_tag "cat-no-image.jpg", class: "rounded-circle", size: "150x150" %>
+       <% end %>
         <h3><%= @cat.full_name %></h3>
       </div>
       <table class="table table-bordered mt-4">
