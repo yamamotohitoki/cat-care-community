@@ -10,6 +10,8 @@
           <li class="list-group-item d-flex justify-content-between align-items-center">
             <div>
               <%= image_tag topic.image, size: "50x50", class: "rounded-circle mr-3" %>
+            </div>
+            <div>
               <%= link_to topic.title, community_topic_path(@community, topic) %>
             </div>
             <div>

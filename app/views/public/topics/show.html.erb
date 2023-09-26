@@ -3,9 +3,9 @@
 <div class="container">
   <div class="card mb-3">
     <% if @topic.image.present? %>
-      <%= image_tag @topic.image, width: 1000, height: 160, class: "img-resize, rounded mx-auto d-block", style: "object-fit: cover;" %>
+      <%= image_tag @topic.image, width: 800, height: 500, class: "img-resize, rounded mx-auto d-block", style: "object-fit: cover;" %>
     <% else %>
-      <%= image_tag 'blog-no-image.jpg', width: 220, height: 160, class: "img-resize, rounded mx-auto d-block", style: "object-fit: cover;" %>
+      <%= image_tag 'blog-no-image.jpg', width: 800, height: 500, class: "img-resize, rounded mx-auto d-block", style: "object-fit: cover;" %>
     <% end %>
   <div class="card-body">
     <h5 class="card-title"><%= @topic.title %></h5>

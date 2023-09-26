@@ -3,8 +3,8 @@
   <div class="row">
     <% @blogs.each do |blog| %>
     <%= link_to blog_path(blog) do %>
-      <div class="col-md-3">
-        <div class="card mb-3">
+      <div class="col-md-3 mb-5">
+        <div class="card h-100 mb-3">
           <% if blog.image.present? %>
             <%= image_tag blog.image, width: 220, height: 160, class: "img-resize, rounded mx-auto d-block", style: "object-fit: cover;" %>
           <% else %>

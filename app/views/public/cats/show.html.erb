@@ -49,7 +49,7 @@
     </div>
   </div>
   <div class="text-center mb-5">
-   <% if @member == @cat.member %>
+   <% if @member == current_member %>
     <%= link_to "編集する", edit_cat_path(@cat), class: "btn btn-outline-success" %>
    <% end %>
   </div>
