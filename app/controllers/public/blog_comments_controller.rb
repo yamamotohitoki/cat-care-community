@@ -13,7 +13,7 @@ class Public::BlogCommentsController < ApplicationController
       redirect_to request.referer
     else
       flash[:alert] = 'コメントの投稿に失敗しました'
-      render 'blogs/show'
+      redirect_to request.referer
     end
   end
 

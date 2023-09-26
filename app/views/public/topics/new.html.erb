@@ -3,6 +3,7 @@
 <div class="container mt-5">
   <h2>トピック作成フォーム</h1>
 <%= form_with model: @topic, url: community_topics_path(@community), method: :post do |form| %>
+  <%= render "public/shared/error_messages", resource: form.object %>
   <div class="form-group">
     <%= form.label :タイトル, class: "control-label" %>
     <%= form.text_field :title, class: "form-control", required: true %>
