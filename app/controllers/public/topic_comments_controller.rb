@@ -8,11 +8,10 @@ class Public::TopicCommentsController < ApplicationController
 
     comment.topic_id = topic.id
 
-    if comment.save!
+    if comment.save
       flash[:notice] = 'コメントが投稿されました'
       redirect_to request.referer
     else
-      binding.pry
       flash[:alert] = 'コメントの投稿に失敗しました'
       redirect_to request.referer
     end

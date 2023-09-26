@@ -6,7 +6,7 @@ class Cat < ApplicationRecord
   has_one_attached :image
 
   validates :name, presence: true,length: { in: 1..20 }
-  validates :introduction,    length: { in: 1..75 }
+  validates :introduction,    length: { in: 1..140 }
 
 
   enum sex: { male: 0, female: 1 }

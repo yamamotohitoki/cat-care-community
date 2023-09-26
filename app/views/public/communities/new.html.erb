@@ -1,6 +1,7 @@
 <div class="container">
 <h1>コミュニティ作成フォーム</h1>
 <%= form_with(model: @community, url: communities_path, local: true) do |form| %>
+  <%= render "public/shared/error_messages", resource: form.object %>
   <div class="form-group">
     <%= form.label :タイトル %>
     <%= form.text_field :title, required: true, class: "form-control" %>
