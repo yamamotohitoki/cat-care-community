@@ -4,7 +4,7 @@ class CreateBlogs < ActiveRecord::Migration[6.1]
       t.integer :member_id, null: false
       t.string :title, null: false
       t.text :body, null: false
-      t.integer :status, null: false
+      t.integer :status, null: false, default: 0
       t.timestamps
     end
   end
