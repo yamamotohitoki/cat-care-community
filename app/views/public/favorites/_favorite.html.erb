@@ -1,0 +1,15 @@
+ <% if member_signed_in? %>
+  <% if blog.favorited_by?(current_member) %>
+  <div id="favorite_buttons_<%= blog.id %>">
+    <%= link_to blog_favorites_path(blog), method: :delete, remote: true, data: {"turbolinks" => false}, class: 'favorite-link' do %>
+      <i class="fas fa-heart" style="color: red;"></i><span id="favorite-count"><%= blog.favorites.count %></span>
+    <% end %>
+  <% else %>
+    <%= link_to blog_favorites_path(blog), method: :post, remote: true, data: {"turbolinks" => false}, class: 'favorite-link' do %>
+      <i class="far fa-heart" style="color: red;"></i><span id="favorite-count"><%= blog.favorites.count %></span>
+    <% end %>
+  <% end %>
+<% else %>
+  <i class="fas fa-heart" style="color: red;"></i><span id="favorite-count"><%= blog.favorites.count %></span>
+  </div>
+<% end %>
