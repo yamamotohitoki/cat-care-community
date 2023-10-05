@@ -7,6 +7,14 @@ class Blog < ApplicationRecord
 
   has_one_attached :image
 
+  def get_image
+  unless image.attached?
+    file_path = Rails.root.join('app/assets/images/logo.png')
+    image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/png')
+  end
+    image.variant(resize_to_fit: [1000, 200]).processed
+  end
+
   validates :title, presence: true, length: { in: 1..20 }
   validates :body, presence: true, length: { in: 1..500 }
 
