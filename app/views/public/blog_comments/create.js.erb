@@ -1,0 +1,2 @@
+$(".blog_comments_count").html("<%= j(render 'public/blog_comments/counter', blog: @blog) %>");
+$(".blog_comments").html("<%= j(render 'public/blog_comments/comment', blog: @blog) %>");

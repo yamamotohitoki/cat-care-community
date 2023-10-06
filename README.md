@@ -3,6 +3,7 @@
 ## サイト概要
 [![Image from Gyazo](https://i.gyazo.com/a0291e873e071563f38730df680ae8df.png)](https://gyazo.com/a0291e873e071563f38730df680ae8df)
 ### サイトテーマ
+
 猫好きの方と情報交換をし、繋がれるコミュニティサイト
 ​
 ### テーマを選んだ理由
@@ -39,4 +40,5 @@
 * フリーイラストとして以下を使用
   - 写真AC (https://www.photo-ac.com/)
   - Canva (https://www.canva.com/ja_jp/create/logos/)
+
 
