@@ -6,12 +6,6 @@ class Public::BlogCommentsController < ApplicationController
     @comment = current_member.blog_comments.new(blog_comment_params)
     @comment.blog_id = @blog.id
     @comment.save
-
-    # if comment.save
-    #   flash[:notice] = 'コメントが投稿されました。'
-    # else
-    #   flash[:alert] = 'コメントの投稿に失敗しました'
-    # end
   end
 
   def destroy

@@ -7,27 +7,27 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-Admin.find_or_create_by!(email: "admin@email.com") do |admin|
-  admin.password = "adminpath"
+Admin.find_or_create_by!(email: "ADMIN_EMAIL") do |admin|
+  admin.password = "ADMIN_PASSWORD"
 end
 
 olivia = Member.find_or_create_by!(email: "olivia@example.com") do |member|
   member.name = "オリビア"
-  member.password = "password"
+  member.password = "MEMBER_PASSWORD"
   member.introduction = "愛猫はスコティッシュフォールドの太郎くんです！太郎くんとの日常を投稿しています！"
   member.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-member3.jpg"), filename:"sample-member1.jpg")
 end
 
 james = Member.find_or_create_by!(email: "james@example.com") do |member|
   member.name = "ジェームズ"
-  member.password = "password"
+  member.password = "MEMBER_PASSWORD"
   member.introduction = "愛猫はマンチカンのマリンちゃんです！マリンちゃんとの日常を投稿しています！"
   member.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-member1.jpg"), filename:"sample-member2.jpg")
 end
 
 lucas = Member.find_or_create_by!(email: "lucas@example.com") do |member|
   member.name = "ルークス"
-  member.password = "password"
+  member.password = "MEMBER_PASSWORD"
   member.introduction = "愛猫はアメリカンショートヘアーのタマです！仲良くしてください！"
   member.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-member2.jpg"), filename:"sample-member3.jpg")
 end
