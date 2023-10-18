@@ -1,37 +1,35 @@
 <div class="container">
-
-    <div class="row mt-3">
-      <div class="col-md-12">
-        <% blog.blog_comments.each do |comment| %>
-          <% if comment.member.profile_image.present? %>
-            <%= image_tag comment.member.profile_image, class: "rounded-circle image_tag", size: "50x50" %>
-          <% else %>
-            <%= image_tag 'member-no-image.jpg', class: "rounded-circle image_tag", size: "50x50" %>
-          <% end %>
-          <%= comment.member.name %>さん
-          <small class="text-muted"><%= comment.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %></small>
-          <div class="card mb-2">
-            <div class="card-body">
-              <p class="comment-author"></p>
-              <p class="card-text"><%= comment.comment %></p>
-              <% if current_member && (comment.member_id == current_member.id) %>
-                <%= link_to "削除", blog_blog_comment_path(blog, comment), method: :delete, data: { confirm: "このコメントを削除しますか？" }, data: {"turbolinks" => false},remote: true, class: 'btn btn-outline-danger btn-sm float-right' %>
-              <% end %>
-            </div>
-          </div>
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <% blog.blog_comments.each do |comment| %>
+        <% if comment.member.profile_image.present? %>
+          <%= image_tag comment.member.profile_image, class: "rounded-circle image_tag", size: "50x50" %>
+        <% else %>
+          <%= image_tag 'member-no-image.jpg', class: "rounded-circle image_tag", size: "50x50" %>
         <% end %>
-      </div>
-    </div>
-    <div class="row mt-3">
-      <div class="col-md-12">
-        <h3>コメントを投稿する</h3>
-        <%= form_with(model: BlogComment.new, url: blog_blog_comments_path(blog), method: :post, local: false) do |f| %>
-          <div class="form-group">
-            <%= f.text_area :comment, placeholder: 'コメントを入力してください', class: 'form-control' %>
+        <%= comment.member.name %>さん
+        <small class="text-muted"><%= comment.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %></small>
+        <div class="card mb-2">
+          <div class="card-body">
+            <p class="comment-author"></p>
+            <p class="card-text"><%= comment.comment %></p>
+            <% if current_member && (comment.member_id == current_member.id) %>
+              <%= link_to "削除", blog_blog_comment_path(blog, comment), method: :delete, data: {"turbolinks" => false}, remote: true, class: 'btn btn-outline-danger btn-sm float-right' %>
+            <% end %>
           </div>
-          <%= f.submit 'コメントする', class: 'btn btn-outline-primary float-right mb-5' %>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
-
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <h3>コメントを投稿する</h3>
+      <%= form_with(model: BlogComment.new, url: blog_blog_comments_path(blog), method: :post, local: false) do |f| %>
+        <div class="form-group">
+          <%= f.text_area :comment, placeholder: 'コメントを入力してください', class: 'form-control' %>
+        </div>
+        <%= f.submit 'コメントする', class: 'btn btn-outline-primary float-right mb-5' %>
+      <% end %>
+    </div>
+  </div>
 </div>
